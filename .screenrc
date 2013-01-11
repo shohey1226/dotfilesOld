@@ -1,0 +1,53 @@
+#shell /ms/dist/fsf/PROJ/bash/3.0/bin/bash
+# Change escape charactor
+escape ^Tt
+
+# Charset
+defencoding utf-8
+defutf8 on
+utf8 on
+encoding utf-8 utf-8
+
+# Change default scrollback value for new windows
+defscrollback 100000                    # default: 100
+
+# Don't display the copyright page
+startup_message off                   # default: on
+
+# use vbell
+#bell on
+vbell off
+vbell_msg '' 
+bell off
+
+
+#shell /ms/dist/fsf/PROJ/bash/3.0/bin/bash
+shell ksh 
+#shelltitle "> |$PROMPT_COMMAND"
+
+# Emacs keybind for spilt region
+bind -c REGION 2 split
+bind -c REGION 1 only
+bind -c REGION 0 remove
+bind -c REGION o focus
+bind -c REGION ^ resize
+bind x command -c REGION
+
+termcapinfo xterm ti@:te@ 
+
+attrcolor s "= kr"
+attrcolor u "g"
+attrcolor b "b"
+attrcolor r "k"
+attrcolor B "W"
+
+# status bar and caption
+hardstatus string "[screen %n: %t] %h"
+
+#caption always ' %{=bu kB}%n %t% %{=b Wb}%W %-w%  %{=b Wb}%m/%d/%y(%D)'
+#caption always ' %{=b Wb}%-w %{=bu kB}%n %t %{=b Wb}%+w  %{=b WB}%m/%d/%y(%D)'
+#caption always '%{=b WB}%c %m/%d/%y(%D)[%l]%{=b Wb} %-w %{=bu kB}%n %t %{=b Wb}%+w'
+#caption always '%{=b WB} %-w %{=bu kB}%n %t %{=b WB}%+w'
+#caption always '%{G}%D %Y %M %d %C%a %{kR} %-w%{Y}%2n %t%{-}%+w' #JB's
+caption always '%{=b WB} %D %Y %M %d %C%a %{b WB}%-w %{=bu kB}%n %t %{=b WB}%+w'
+
