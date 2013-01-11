@@ -1,0 +1,74 @@
+! SCIM - Japanese Input
+*inputMethod: SCIM
+
+!=======
+! XTERM
+!=======
+
+!xterm*font:             3x7
+xterm*font:             7x14
+xterm*jumpScroll:       true
+xterm*saveLines:        5000
+!xterm*scrollBar:        true
+!xterm*backarrowKey:     false
+xterm*cursorColor:		Red  
+XTerm*color0:	#000000
+XTerm*color1:	#e21818
+XTerm*color2:	#18b218
+XTerm*color3:	#FFFF00
+XTerm*color4:	#6D85ED
+XTerm*color5:	#ba55d3
+XTerm*color6:	#00BFFF
+XTerm*color7:	#b2b2b2
+XTerm*color8:	#686868
+XTerm*color9:	#FF5454
+XTerm*color10:	#54FF54
+XTerm*color11:	#FFFF54
+XTerm*color12:	#7395FF
+XTerm*color13:	#FF54FF
+XTerm*color14:	#54FFFF
+XTerm*color15:	#FFFFFF
+XTerm*color16:	#000000
+XTerm*background:	black
+XTerm*foreground:   white
+
+!=======
+! URXVT
+!=======
+URxvt*cutchars: >@:=
+URxvt*inputMethod: XIM
+URxvt*cursorColor: red
+urxvt*termName: rxvt
+URxvt*foreground: white
+URxvt*background: black
+URxvt*transparent: true
+!URxvt*tintColor: pink
+URxvt*scrollBar_right: true 
+URxvt*inheritPixmap : true
+URxvt*scrollBar: off 
+!URxvt*shading: 20
+!URxvt*font: xft:Bitstream Vera Sans Mono:size=11,xft:Kochi Gothic:style=Regular:size=11
+URxvt*font:             7x14
+URxvt*saveLines:    20000 
+!URxvt*Lines:    20000 
+URxvt*color0:	#000000
+URxvt*color1:	#e21818
+URxvt*color2:	#18b218
+URxvt*color3:	#FFFF00
+URxvt*color4:	#6D85ED
+URxvt*color5:	#ba55d3
+URxvt*color6:	#00BFFF
+URxvt*color7:	#b2b2b2
+URxvt*color8:	#686868
+URxvt*color9:	#FF5454
+URxvt*color10:	#54FF54
+URxvt*color11:	#FFFF54
+URxvt*color12:	#7395FF
+URxvt*color13:	#FF54FF
+URxvt*color14:	#54FFFF
+URxvt*color15:	#FFFFFF
+URxvt*color16:	#000000
+
+
+!Dtsession*wmStartupCommand: /ms/user/k/kamesho/bin/ratpoison
+xscreensaver.timeout: 5
