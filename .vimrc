@@ -1,5 +1,8 @@
 set nocompatible " This is vim, not vi  
 filetype off
+
+nnoremap <C-n> gt
+nnoremap <C-p> gT
  
 set rtp+=~/.vim/vundle.git/
 call vundle#rc()
@@ -7,6 +10,11 @@ call vundle#rc()
 Bundle 'Shougo/neocomplcache'
 "Bundle 'petdance/vim-perl'
 Bundle 'hotchpotch/perldoc-vim'
+"JSLint
+Bundle 'basyura/jslint.vim'
+
+"color
+Bundle 'tomasr/molokai'
  
 " Examples
 " vim-scripts リポジトリ (1)
@@ -24,7 +32,7 @@ let $GIT_SSL_NO_VERIFY = 'true' " Vundle対策
 "=========================
 syntax on
 "set number
-set nowrap
+"set nowrap
 set nobackup
 set noswapfile
 set autoread
@@ -119,5 +127,25 @@ if !exists('g:neocomplcache_keyword_patterns')
 endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
+" perldoc 
+" K キーを押したらPerldoc が起動するように設定
+noremap K :Perldoc<CR>
+" vim が認識する単語境界の文字の種類を設定
+setlocal iskeyword-=/
+" Perl のモジュール名全体(Foo::Bar)を単語として認識させたいため、: を追加  
+setlocal iskeyword+=:
 
+"=========================================
+" JSLint
+"=========================================
+augroup MyGroup
+  autocmd! MyGroup
+  autocmd FileType javascript call s:javascript_filetype_settings()
+augroup END
+
+function! s:javascript_filetype_settings()
+  autocmd BufLeave     <buffer> call jslint#clear()
+  autocmd BufWritePost <buffer> call jslint#check()
+  autocmd CursorMoved  <buffer> call jslint#message()
+endfunction
 
