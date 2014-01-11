@@ -43,7 +43,7 @@ augroup END
 set autoindent smartindent
 set smarttab
 set softtabstop=4 tabstop=4 shiftwidth=4
-autocmd! FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+au FileType html setl sw=2 sts=2 et
 set expandtab
 set backspace=indent,eol,start
 set ignorecase smartcase
