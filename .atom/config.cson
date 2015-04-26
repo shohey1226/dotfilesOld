@@ -1,0 +1,31 @@
+"*":
+  editor:
+    invisibles: {}
+    fontSize: 12
+  core:
+    themes: [
+      "atom-dark-ui"
+      "railscast-theme"
+    ]
+    audioBeep: false
+    disabledPackages: [
+      "autocomplete-plus"
+    ]
+  "filetype-color":
+    enabled: "false"
+  "autocomplete-plus": {}
+  "exception-reporting":
+    userId: "c913aae6-8a25-a8ea-b68d-2d0e623df09b"
+  welcome:
+    showOnStartup: false
+  linter: {}
+  "block-cursor":
+    primaryColor:
+      red: 0
+      green: 249
+      blue: 0
+      alpha: 1
+    blinkInterval: 0
+  term2:
+    colors: {}
+  "web-browser": {}

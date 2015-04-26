@@ -14,4 +14,8 @@ NOT to forget..
     $ git remote add origin https://github.com/shoheik/dotfiles.git
     $ git push -u origin master
 
+## obtain Submodule 
+
+    $ git submodule init .vim/vundle.git/
+    $ git submodule update .vim/vundle.git/
 
