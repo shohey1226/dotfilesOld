@@ -7,9 +7,89 @@ describe "AtomicEmacs", ->
     waitsForPromise =>
       atom.project.open().then (editor) =>
         @editor = editor
-        @event = targetView: => {editor: @editor}
+        @event = target: => {getModel: => @editor}
         @atomicEmacs = new AtomicEmacs()
         @atomicEmacs.editor = (_) => @editor
+
+  describe "atomic-emacs:upcase-word-or-region", ->
+    describe "when there is no selection", ->
+      it "upcases the word after each cursor (if any)", ->
+        EditorState.set(@editor, "[0]Aa bb\ncc[1] dd ee[2]\nff [3]")
+        @atomicEmacs.upcaseWordOrRegion(@event)
+        expect(EditorState.get(@editor)).toEqual("AA[0] bb\ncc DD[1] ee\nFF[2] [3]")
+
+      it "merges any cursors that coincide", ->
+        EditorState.set(@editor, "[0]aa[1]")
+        @atomicEmacs.upcaseWordOrRegion(@event)
+        expect(EditorState.get(@editor)).toEqual("AA[0]")
+
+    describe "when there are selections", ->
+      it "upcases each word in each selection", ->
+        EditorState.set(@editor, "aa (0)bb cc[0] dd\nee f[1]ffgg(1)g")
+        @atomicEmacs.upcaseWordOrRegion(@event)
+        expect(EditorState.get(@editor)).toEqual("aa (0)BB CC[0] dd\nee f[1]FFGG(1)g")
+
+  describe "atomic-emacs:downcase-word-or-region", ->
+    describe "when there is no selection", ->
+      it "downcases the word after each cursor (if any)", ->
+        EditorState.set(@editor, "[0]aA BB\nCC[1] DD EE[2]\nFF [3]")
+        @atomicEmacs.downcaseWordOrRegion(@event)
+        expect(EditorState.get(@editor)).toEqual("aa[0] BB\nCC dd[1] EE\nff[2] [3]")
+
+      it "merges any cursors that coincide", ->
+        EditorState.set(@editor, "[0]AA[1]")
+        @atomicEmacs.downcaseWordOrRegion(@event)
+        expect(EditorState.get(@editor)).toEqual("aa[0]")
+
+    describe "when there are selections", ->
+      it "downcases each word in each selection", ->
+        EditorState.set(@editor, "AA (0)BB CC[0] DD\nEE F[1]FFGG(1)G")
+        @atomicEmacs.downcaseWordOrRegion(@event)
+        expect(EditorState.get(@editor)).toEqual("AA (0)bb cc[0] DD\nEE F[1]ffgg(1)G")
+
+  describe "atomic-emacs:capitalize-word-or-region", ->
+    describe "when there is no selection", ->
+      it "capitalizes the word after each cursor (if any)", ->
+        EditorState.set(@editor, "[0]aA bb\ncc[1] dd ee[2]\nff [3]")
+        @atomicEmacs.capitalizeWordOrRegion(@event)
+        expect(EditorState.get(@editor)).toEqual("Aa[0] bb\ncc Dd[1] ee\nFf[2] [3]")
+
+      it "merges any cursors that coincide", ->
+        EditorState.set(@editor, "[0]aa[1]")
+        @atomicEmacs.capitalizeWordOrRegion(@event)
+        expect(EditorState.get(@editor)).toEqual("Aa[0]")
+
+    describe "when there are selections", ->
+      it "capitalizes each word in each selection", ->
+        EditorState.set(@editor, "aa (0)bb CC[0] dd\nee f[1]FFGG(1)G")
+        @atomicEmacs.capitalizeWordOrRegion(@event)
+        expect(EditorState.get(@editor)).toEqual("aa (0)Bb Cc[0] dd\nee f[1]Ffgg(1)G")
+
+  describe "atomic-emacs:transpose-chars", ->
+    it "transposes the current character with the one after it", ->
+      EditorState.set(@editor, "ab[0]cd")
+      @atomicEmacs.transposeChars(@event)
+      expect(EditorState.get(@editor)).toEqual("acb[0]d")
+
+    it "transposes the last two characters of the line at the end of a line", ->
+      EditorState.set(@editor, "abc[0]\ndef")
+      @atomicEmacs.transposeChars(@event)
+      expect(EditorState.get(@editor)).toEqual("acb[0]\ndef")
+
+    it "transposes the first character with the newline at the start of a line", ->
+      EditorState.set(@editor, "abc\n[0]def")
+      @atomicEmacs.transposeChars(@event)
+      expect(EditorState.get(@editor)).toEqual("abcd\n[0]ef")
+
+    it "does nothing at the beginning of the buffer", ->
+      EditorState.set(@editor, "[0]abcd")
+      @atomicEmacs.transposeChars(@event)
+      expect(EditorState.get(@editor)).toEqual("[0]abcd")
+
+    it "transposes the last two characters at the end of the buffer", ->
+      EditorState.set(@editor, "abcd[0]")
+      @atomicEmacs.transposeChars(@event)
+      expect(EditorState.get(@editor)).toEqual("abdc[0]")
 
   describe "atomic-emacs:transpose-words", ->
     it "transposes the current word with the one after it", ->
@@ -269,6 +349,17 @@ describe "AtomicEmacs", ->
       expect(event.abortKeyBinding).toHaveBeenCalled()
       expect(EditorState.get(@editor)).toEqual("x[0]")
 
+  describe "atomic-emacs:close-other-panes", ->
+    it "should close all inactive panes", ->
+      pane1 = atom.workspace.getActivePane()
+      pane2 = pane1.splitRight()
+      pane3 = pane2.splitRight()
+      pane2.activate()
+      @atomicEmacs.closeOtherPanes()
+      expect(pane1.isDestroyed()).toEqual(true)
+      expect(pane2.isDestroyed()).toEqual(false)
+      expect(pane3.isDestroyed()).toEqual(true)
+
   describe "atomic-emacs:forward-char", ->
     it "moves the cursor forward one character", ->
       EditorState.set(@editor, "[0]x")
@@ -349,6 +440,54 @@ describe "AtomicEmacs", ->
       @atomicEmacs.forwardWord(@event)
       expect(EditorState.get(@editor)).toEqual("aa bb  [0]")
 
+  describe "atomic-emacs:forward-sexp", ->
+    it "moves all cursors forward one symbolic expression", ->
+      EditorState.set(@editor, "[0]  aa\n[1](bb cc)\n")
+      @atomicEmacs.forwardSexp(@event)
+      expect(EditorState.get(@editor)).toEqual("  aa[0]\n(bb cc)[1]\n")
+
+    it "merges cursors that coincide", ->
+      EditorState.set(@editor, "[0] [1]aa")
+      @atomicEmacs.forwardSexp(@event)
+      expect(EditorState.get(@editor)).toEqual(" aa[0]")
+
+  describe "atomic-emacs:backward-sexp", ->
+    it "moves all cursors backward one symbolic expression", ->
+      EditorState.set(@editor, "aa [0]\n(bb cc)[1]\n")
+      @atomicEmacs.backwardSexp(@event)
+      expect(EditorState.get(@editor)).toEqual("[0]aa \n[1](bb cc)\n")
+
+    it "merges cursors that coincide", ->
+      EditorState.set(@editor, "aa[0] [1]")
+      @atomicEmacs.backwardSexp(@event)
+      expect(EditorState.get(@editor)).toEqual("[0]aa ")
+
+  describe "atomic-emacs:back-to-indentation", ->
+    it "moves cursors forward to the first character if in leading space", ->
+      EditorState.set(@editor, "[0]  aa\n [1] bb\n")
+      @atomicEmacs.backToIndentation(@event)
+      expect(EditorState.get(@editor)).toEqual("  [0]aa\n  [1]bb\n")
+
+    it "moves cursors back to the first character if past it", ->
+      EditorState.set(@editor, "  a[0]a\n  bb[1]\n")
+      @atomicEmacs.backToIndentation(@event)
+      expect(EditorState.get(@editor)).toEqual("  [0]aa\n  [1]bb\n")
+
+    it "leaves cursors alone if already there", ->
+      EditorState.set(@editor, "  [0]aa\n[1]  bb\n")
+      @atomicEmacs.backToIndentation(@event)
+      expect(EditorState.get(@editor)).toEqual("  [0]aa\n  [1]bb\n")
+
+    it "moves cursors to the end of their lines if they only contain spaces", ->
+      EditorState.set(@editor, " [0] \n  [1]\n")
+      @atomicEmacs.backToIndentation(@event)
+      expect(EditorState.get(@editor)).toEqual("  [0]\n  [1]\n")
+
+    it "merges cursors after moving", ->
+      EditorState.set(@editor, "  a[0]a[1]\n")
+      @atomicEmacs.backToIndentation(@event)
+      expect(EditorState.get(@editor)).toEqual("  [0]aa\n")
+
   describe "atomic-emacs:previous-line", ->
     it "moves the cursor up one line", ->
       EditorState.set(@editor, "ab\na[0]b\n")
@@ -406,66 +545,66 @@ describe "AtomicEmacs", ->
       expect(EditorState.get(@editor)).toEqual("a[0]b\nab\nab\n")
 
   describe "atomic-emacs:backward-paragraph", ->
-    it "moves the cursor backwards to an empty line", ->
-      EditorState.set(@editor, "aaaaa\n\nbbbbbb")
-      @editor.moveToBottom()
+    it "moves back to an empty line", ->
+      EditorState.set(@editor, "a\n\nb\nc\n[0]d")
       @atomicEmacs.backwardParagraph(@event)
-      expect(@editor.getCursorBufferPosition().row).toEqual(1)
+      expect(EditorState.get(@editor)).toEqual("a\n[0]\nb\nc\nd")
 
-    it "moves the cursor backwards to a line that only contains spaces", ->
-      EditorState.set(@editor, "aaaaa\n                    \nbbbbbb")
-      @editor.moveToBottom()
+    it "moves back to the beginning of a line with only whitespace", ->
+      EditorState.set(@editor, "a\n \t\nb\nc\nd[0]")
       @atomicEmacs.backwardParagraph(@event)
-      expect(@editor.getCursorBufferPosition().row).toEqual(1)
+      expect(EditorState.get(@editor)).toEqual("a\n[0] \t\nb\nc\nd")
 
-    it "moves the cursor backwards to a line that only contains tabs", ->
-      EditorState.set(@editor, "aaaaa\n\t\t\t\nbbbbbb")
-      @editor.moveToBottom()
+    it "stops if it reaches the beginning of the buffer", ->
+      EditorState.set(@editor, "a\nb\n[0]c")
       @atomicEmacs.backwardParagraph(@event)
-      expect(@editor.getCursorBufferPosition().row).toEqual(1)
+      expect(EditorState.get(@editor)).toEqual("[0]a\nb\nc")
 
-    it "moves the cursor backwards to a line that only contains whitespaces", ->
-      EditorState.set(@editor, "aaaaa\n\t  \t\t    \nbbbbbb")
-      @editor.moveToBottom()
+    it "does not stop on its own line", ->
+      EditorState.set(@editor, "a\n\nb\nc\n[0]\n")
       @atomicEmacs.backwardParagraph(@event)
-      expect(@editor.getCursorBufferPosition().row).toEqual(1)
+      expect(EditorState.get(@editor)).toEqual("a\n[0]\nb\nc\n\n")
 
-    it "does nothing when the cursor is at the first line of the buffer", ->
-      EditorState.set(@editor, "aaaaa\n\t  \t\t    \nbbbbbb")
-      @editor.moveToTop()
+    it "moves to the beginning of the line if on the first line", ->
+      EditorState.set(@editor, "a[0]a\n")
       @atomicEmacs.backwardParagraph(@event)
-      expect(@editor.getCursorBufferPosition().row).toEqual(0)
+      expect(EditorState.get(@editor)).toEqual("[0]aa\n")
+
+    it "moves all cursors, and merges cursors that coincide", ->
+      EditorState.set(@editor, "a\n\nb\nc\n[0]\nd\n[1]e\n[2]")
+      @atomicEmacs.backwardParagraph(@event)
+      expect(EditorState.get(@editor)).toEqual("a\n[0]\nb\nc\n[1]\nd\ne\n")
 
   describe "atomic-emacs:forward-paragraph", ->
-    it "moves the cursor forward to an empty line", ->
-      EditorState.set(@editor, "aaaaa\n\nbbbbbb")
-      @editor.moveToTop()
+    it "moves forward to an empty line", ->
+      EditorState.set(@editor, "a\n[0]b\nc\n\nd")
       @atomicEmacs.forwardParagraph(@event)
-      expect(@editor.getCursorBufferPosition().row).toEqual(1)
+      expect(EditorState.get(@editor)).toEqual("a\nb\nc\n[0]\nd")
 
-    it "moves the cursor forward to a line that only contains spaces", ->
-      EditorState.set(@editor, "aaaaa\n                    \nbbbbbb")
-      @editor.moveToTop()
+    it "moves forward to the beginning of a line with only whitespace", ->
+      EditorState.set(@editor, "a\n[0]b\nc\n \t\nd")
       @atomicEmacs.forwardParagraph(@event)
-      expect(@editor.getCursorBufferPosition().row).toEqual(1)
+      expect(EditorState.get(@editor)).toEqual("a\nb\nc\n[0] \t\nd")
 
-    it "moves the cursor forward to a line that only contains tabs", ->
-      EditorState.set(@editor, "aaaaa\n\t\t\t\nbbbbbb")
-      @editor.moveToTop()
+    it "stops if it reaches the end of the buffer", ->
+      EditorState.set(@editor, "a\n[0]b\nc")
       @atomicEmacs.forwardParagraph(@event)
-      expect(@editor.getCursorBufferPosition().row).toEqual(1)
+      expect(EditorState.get(@editor)).toEqual("a\nb\nc[0]")
 
-    it "moves the cursor forward to a line that only contains whitespaces", ->
-      EditorState.set(@editor, "aaaaa\n\t  \t\t    \nbbbbbb")
-      @editor.moveToTop()
+    it "does not stop on its own line", ->
+      EditorState.set(@editor, "a\n[0]\nb\nc\n\nd")
       @atomicEmacs.forwardParagraph(@event)
-      expect(@editor.getCursorBufferPosition().row).toEqual(1)
+      expect(EditorState.get(@editor)).toEqual("a\n\nb\nc\n[0]\nd")
 
-    it "does nothing when the cursor is at the last line of the buffer", ->
-      EditorState.set(@editor, "aaaaa\n\t  \t\t    \nbbbbbb")
-      @editor.moveToBottom()
+    it "moves to the end of the line if on the last line", ->
+      EditorState.set(@editor, "a[0]a")
       @atomicEmacs.forwardParagraph(@event)
-      expect(@editor.getCursorBufferPosition().row).toEqual(2)
+      expect(EditorState.get(@editor)).toEqual("aa[0]")
+
+    it "moves all cursors, and merges cursors that coincide", ->
+      EditorState.set(@editor, "a\n[0]\nb\nc\n[1]\nd\n[2]e\n")
+      @atomicEmacs.forwardParagraph(@event)
+      expect(EditorState.get(@editor)).toEqual("a\n\nb\nc\n[0]\nd\ne\n[1]")
 
   describe "atomic-emacs:exchange-point-and-mark", ->
     it "exchanges all cursors with their marks", ->
@@ -475,3 +614,19 @@ describe "AtomicEmacs", ->
         cursor.moveRight()
       @atomicEmacs.exchangePointAndMark(@event)
       expect(EditorState.get(@editor)).toEqual("[0].(0).[1].(1)")
+
+  describe "atomic-emacs:delete-indentation", ->
+    it "joins the current line with the previous one if at the start of the line", ->
+      EditorState.set(@editor, "aa \n[0] bb\ncc")
+      @atomicEmacs.deleteIndentation()
+      expect(EditorState.get(@editor)).toEqual("aa[0] bb\ncc")
+
+    it "does exactly the same thing if at the end of the line", ->
+      EditorState.set(@editor, "aa \n bb[0]\ncc")
+      @atomicEmacs.deleteIndentation()
+      expect(EditorState.get(@editor)).toEqual("aa[0] bb\ncc")
+
+    it "joins the two empty lines if they're both blank", ->
+      EditorState.set(@editor, "aa\n\n[0]\nbb")
+      @atomicEmacs.deleteIndentation()
+      expect(EditorState.get(@editor)).toEqual("aa\n[0]\nbb")

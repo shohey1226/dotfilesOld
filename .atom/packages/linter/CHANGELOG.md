@@ -1,345 +1,206 @@
-# v0.12.1
+## 1.8.1
 
-### New features
+* Workaround an atom bug where moving an editor between panes would throw an error
+* Allow panel resize to persist
+* Add option to always have the panel to fill the minimum space
+* Fix issue where external scope errors would cause panel to continue displaying
 
-* Support rust linter ([#290][290])
-* Handle missing linter executable ([#449][449])
+## 1.8.0
 
-### Bug fixes
+* Improve rendering of multiline messages to align with recent single line changes
+* Enable clicking on multiline messages to view next lines
+* Add default styles for `Info` type
+* Aligned bottom panel buttons
+* Made the text in the bottom panel selectable
+* Linter bottom panel is now resizable (Drag the height down to 0 to reset your changes)
+* Add a new `class` attribute for providers (when class is provided, no class is automatically added).
+* Fix linter gutter dot alignment across themes and zoom level.
 
-* Fix underline when line height isn't default ([#500][500])
+## 1.7.2
 
-[500]: https://github.com/AtomLinter/Linter/pull/500
-[449]: https://github.com/AtomLinter/Linter/pull/449
-[290]: https://github.com/AtomLinter/Linter/pull/290
+* Fixed links for multiline messages
 
-# v0.12.0
+## 1.7.1
 
-### New features
-* New option: clear lint messages on change ([#437][437])
-* Click on status bar to move to error ([#422][422])
-* Improved package load time ([#428][428] & more)
-* Highlights are more visible ([#416][416])
+* Fix a crash that would happen if message has a filePath but doesn't have a link in DOM
 
-[416]: https://github.com/AtomLinter/Linter/pull/416
-[422]: https://github.com/AtomLinter/Linter/pull/422
-[428]: https://github.com/AtomLinter/Linter/pull/428
-[437]: https://github.com/AtomLinter/Linter/pull/437
+## 1.7.0
 
+* Add `showProviderName` config
+* Deprecated self-APIs `Linter::{onDidChangeMessages, onDidChangeProjectMessages, getProjectMessages, setProjectMessages, deleteProjectMessages}` have been removed
+* Add new `gutterEnabled` and `gutterPosition` configurations
+* Removed EditorLinter::destroy in favor of EditorLinter::dispose
+* `.icon-right::before` css selector has been replaced by `.linter-gutter` of the new linter gutter element.
+* Added `onDidMessage{Add, Remove, Delete}` listeners on EditorLinter for self-api consumers
+* Added EditorLinter::getMessages API for getting messages specific to that editor linter.
+* Linter now supports decorating multiple panes at the same time. Decorations are no longer removed and re-added on tab changed, only added to the new tab. Which could improve the tab switch performance with large errors.
+* Multiline messages render correctly by allowing overflow and using flexbox to enable single line output of the location.
+* Remove location from bubble information.
 
-### Bug fixes
-* More deprecation fixes
+## 1.6.0
 
+* Fixed messages so that they line up and don't wrap in weird ways (Fixes #859)
+* Lint is toggled everytime you toggle enable linter
 
-# v0.11.1
+## 1.5.2
 
-### Bug fixes
-* Fix bug with new keybinding ([#407][407])
+* Add `displayLinterInfo` config to toggle visibility of bottom panel
 
-[407]: https://github.com/AtomLinter/Linter/issues/407
+## 1.5.1
 
+* Messages are now tracked on a per-buffer basis rather than per-editor,
+  improving the multi-pane experience by eliminating the potential for stale
+  results.
+* Fix extra padding in panel when there's no messages
 
-# v0.11.0
+## 1.5.0
 
-### New features
-* Add next-message and previous-message keybinds ([#123][123])
-* New 'info' message level ([#309][309])
-* Add Linux/Windows keybind `ctrl-k ctrl-l` to run lint ([#175][175])
-* Status bar summary only appears when there are messages
+* Fix baseline alignment of text on the bottom bar
+* Fix a bug where linter:togglePanel won't work
+* Stricter message validation, helps catching provider bugs
 
-[123]: https://github.com/AtomLinter/Linter/issues/123
-[175]: https://github.com/AtomLinter/Linter/issues/175
-[309]: https://github.com/AtomLinter/Linter/pull/309
+## 1.4.3
 
-### New linters
-* Python PEP 257 (docstring linter)
+* Fix a bug where bottom tabs's count won't be updated on pane change unless lint is triggered
+* Fix a bug where paths would be shown at first even when file tab is selected.
 
-### Bug fixes
-* Fix undefined method error caused by deprecation fix (sorry)
+## 1.4.2
 
+* Re-add `statusIconPosition` config
+* Fix a typo in Linter:toggle
 
-# v0.10.1
+## 1.4.1
 
-### Bug fixes
-* Fix more deprecations
-* Stop throwing error when deactivated ([#327][327])
+* Fix a critical typo
 
-[327]: https://github.com/AtomLinter/Linter/issues/327
+## 1.4.0
 
+* Fix a bug where clicking non-active bottom container tab wouldn't enable bottom panel (Fixes #830)
+* Fix a bug where markers from files not opened at linting time won't work (only applies to Project-scoped-linters)
+* Introduce an extremely efficient bottom panel (bubble is the only performance bottleneck now)
 
-# v0.10.0
+## 1.3.4
 
-### New features
-* New status bar summary view ([#277][277])
+* Messages are now deleted when a linter provider is deleted/deactivated.
 
-[277]: https://github.com/AtomLinter/Linter/pull/277
+## 1.3.3
 
-### Bug fixes
-* Fix error during Atom startup ([#329][329])
+* Fix linter-panel's `overflow-y` to only display the scrollbar when necessary.
+* Fix some error cases where markers won't be destroyed properly.
 
-[329]: https://github.com/AtomLinter/Linter/issues/329
+## 1.3.2
 
+* Increase messages refresh interval, which should result in a cpu load decrease
 
-# v0.9.1
+## 1.3.1
 
-### Bug fixes
-* Fix usage of deprecated Space Pen API ([#318][318])
+* Fix a critical typo affecting multi line messages
 
-[318]: https://github.com/AtomLinter/Linter/pull/318
+## 1.3.0
 
+* Fix a bug where messages would be updated for a lazy linter after text editor has closed and there is no way to make them disappear
+* Fix a bug where linter:toggle won't clear errors
+* Fix a bug where linter:lint won't update the bottom status icon count
+* Add statusIconScope configuration
+* Fix a bug where panel won't be toggled if you click the bottom tab twice
+* Fix a bug where stringish errors from providers won't be handled properly
+* Fix several typos
+* Add efficient marker updates mechanism (:racehorse:)
+* Lots of cleanups and re-organization
+* Add a bunch of new Events for self-api consumers
+* :fire: Remove support for legacy providers completely!
+* :art: Fix wrapping of issue messages
+* Remove `alt` keybindings to avoid conflict with core's
+* Add contribution guidelines
+* Fixed a marker leak with bubbles, which would make editor slower over time.
+* Remove an oudated config (`statusIconPosition`).
+* Invalidate Range when a range is removed from buffer.
 
-# v0.9.0
+## 1.2.3
 
-### New features
-* Upgraded inline view ([#274][274])
-* More subtle error highlighting ([#275][275])
+* Fix a bug where panel won't be hidden even with no errors.
 
-[274]: https://github.com/AtomLinter/Linter/pull/274
-[275]: https://github.com/AtomLinter/Linter/pull/275
+## 1.2.2
 
-### Bug fixes
-* Fix TextEditor destroyed error ([#279][279])
-* More deprecation fixes
+* Fix a bug where count wont be updated on render.
 
-[279]: https://github.com/AtomLinter/Linter/issues/279
+## 1.2.1
 
+* Fix a bug with legacy Linter API
 
-# v0.8
+## 1.2.0
 
-### New features
-* Easier to understand config screen ([#266][266])
+* Fix a bug when Error Panel won't collapse even when there's no errors with File as Active Tab
+* Speed Improvements
+* Remove the "Default Error Tab" config option in favor of storing the currently selected tab in the package state.
+* Fix a bug where require time errors of legacy API providers would be shown as linter errors
+* Tweak the status line item positioning
+* Add Helpers which aid the creation of Command Line Linters.
+* Add `linter:togglePanel` command to toggle bottom panel
+* Add `linter.ignoredMessageTypes` config to ignore certain message types
 
-### New linters
-* flow, bootlint
+## 1.1.0
 
-[266]: https://github.com/AtomLinter/Linter/pull/266
+* Add support for collapsible messages
+* Add tab `Line` to show only errors of the current line.
+* Add config options to hide individual tabs (`Line`, `File`, `Project`).
 
-### Bug fixes
-* Fix line undefined error ([#257][257])
-* Shadow DOM compatibility
+## 1.0.9
 
-[257]: https://github.com/AtomLinter/Linter/issues/257
+* Add some default keybindings (Fixes #597)
+* Fix a bug where changing project paths won't trigger Linters (Fixes #622)
+* UI is rendered when Messages are changed programatically (Fixes #639)
+* Make the position of bottom status icon configurable
+* Fix a bug where disabling underline would also disable gutter indicator
 
+## 1.0.8
 
-# v0.7.4
+* Fix a critical error in self service provider
 
-### Bug fixes
-* Escape linter messages ([#231][231])
-* Fix error when closing tab ([#253][253])
-* Get rid of some uses of deprecated Atom APIs
+## 1.0.7
 
+* Rename the status line summary (from `Errors` to `Issues`)
+* Rename the `Current File` tab to just `File`
+* Move the `No Issues` badge to the right side of the bottom bar
+* Fix a bug where a message containing HTMLElement would do weird things
+* Allow Issue underlining to be configured from settings
 
-### New features
-* Provide file as errorStream (See [#255][255])
+## 1.0.6
 
-[231]: https://github.com/AtomLinter/Linter/pull/231
-[253]: https://github.com/AtomLinter/Linter/pull/253
-[255]: https://github.com/AtomLinter/Linter/issues/255
+* Hide Status Bar buttons when Active Pane is not an editor
 
+## 1.0.5
 
-# v0.7.3
+* Fix message render for non TextEditor panes (Fixes #610)
+* Make the bubble follow cursor
+* Show a nicer error if linter binary doesn't exist (Fixes #612)
+* Add set-bubble-transparent command to set the bubble transparent until the key is released (Fixes #608)
+* Deselect bottom tab when error panel is hidden
+* Add linter:lint command (Fixes #624)
 
-### Bug fixes
+## 1.0.4
 
-* Removed dependency on copy-paste module, hopefully fixing Windows
-  installation problems. See [#223][223], [#210][210], and [#186][186].
+* Fix a critical bug introduced by 1.0.3
 
-[223]: https://github.com/AtomLinter/Linter/issues/223
-[210]: https://github.com/AtomLinter/Linter/issues/210
-[186]: https://github.com/AtomLinter/Linter/issues/186
+## 1.0.3
 
-# v0.7.2
+* Treat legacy messages as text instead of html
+* Fix a bug causing linter messages to briefly disappear and reappear
+* Fix memory leak (Markers weren't getting cleaned up)
+* Use the same filename as the source when generating a temporary file (Fixes #585)
 
-### Bug fixes
-* Fix error when message is on final line of file (See [#165][165])
+## 1.0.2
 
-[165]: https://github.com/AtomLinter/Linter/issues/165
+* Lint requests are now ignored until the file is saved
+* Allow the user to hide bottom panel from settings or by clicking active tab
+* Add linter:next-error command to jump to next error in code
+* Allow jump to next error by clicking the bottom status icon
+* Add linter:toggle command to disable linting for current text editor temporarily
 
-# v0.7.1
+## 1.0.1
 
-### Bug fixes
-* Fix ENOTEMPTY error (See [#218][218])
-* Minor tweaks to inline view (See [#215][215])
+* Fix a compatibility issue: linters were only linting what was on disk.
 
-[215]: https://github.com/AtomLinter/Linter/pull/215
-[218]: https://github.com/AtomLinter/Linter/issues/218
+## 1.0.0
 
-# v0.7.0
-
-### New features
-* Option to display linter messages inline with code (See [#195][195])
-
-### Bug fixes
-* Clean up temporary directories (See [#212][212])
-
-[195]: https://github.com/AtomLinter/Linter/pull/195
-[212]: https://github.com/AtomLinter/Linter/issues/212
-
-# v0.6.1
-
-### Bug fixes
-* Fix keyboard shortcuts not working on lines containing lint messages
-  (See [#84][84], [#194][194])
-
-[84]: https://github.com/AtomLinter/Linter/issues/84
-[194]: https://github.com/AtomLinter/Linter/issues/194
-
-# v0.6.0
-
-### New features
-* Option to always show all messages in status bar (See [#196][196])
-
-### New linters
-* htmlhint, pylama, squirrel, CoDscript
-
-[196]: https://github.com/AtomLinter/Linter/pull/196
-
-# v0.5.18
-
-### Bug Fixes
-* Compatibility with [git-diff][gitdiff] (See [#121][121], [#202][202])
-
-[121]: https://github.com/AtomLinter/Linter/issues/121
-[202]: https://github.com/AtomLinter/Linter/issues/202
-[gitdiff]: https://atom.io/packages/git-diff
-
-# v0.5.17
-
-### Bug Fixes
-* Fix regression for multiple linters in one file (See [#193][193],
-  [#194][194])
-
-[193]: https://github.com/AtomLinter/Linter/issues/193
-[194]: https://github.com/AtomLinter/Linter/pull/194
-
-# v0.5.16
-
-### Bug Fixes
-* Better compatibility with `rubocop` and `GHC-mod` (See [#192][192],
-  [AtomLinter/rubocop#2][rubocop2])
-
-[192]: https://github.com/AtomLinter/Linter/issues/192
-[rubocop2]: https://github.com/AtomLinter/linter-rubocop/issues/2
-
-# v0.5.15
-
-### New Features
-* Allow `executablePath` to be a path to an actual executable. Fixes some
-  `spawn ENOTDIR` errors (See [#190][190], [#102][102], [#95][95])
-
-[95]: https://github.com/AtomLinter/Linter/issues/95#issuecomment-50035054
-[102]: https://github.com/AtomLinter/Linter/issues/102#issuecomment-47029312
-[190]: https://github.com/AtomLinter/Linter/issues/190
-
-# v0.5.14
-
-### Bug Fixes
-* Fix `spawn ENOENT` errors in projects that have `package.json` files (See [#119](https://github.com/AtomLinter/Linter/issues/119), [#179](https://github.com/AtomLinter/Linter/pull/179))
-
-# v0.5.12
-
-### Bug Fixes
-* Fix "multiple linters on the same file" problem for real
-
-# v0.5.11
-
-### New Linters
-* [linter-puppet-lint](https://atom.io/packages/linter-puppet-lint), for Puppet, using `puppet-lint`
-* [linter-js-yaml](https://atom.io/packages/linter-js-yaml), for Yaml, using `js-yaml`
-
-# v0.5.8
-
-### Bug Fixes
-* Fix for multiple linters on the same file ([#139](https://github.com/AtomLinter/Linter/issues/139))
-
-### New Linters
-* [linter-clojure](https://atom.io/packages/linter-clojure), for Clojure, using clojure.
-
-# v0.5.7
-
-### Bug Fixes
-* Fix linters not working on Windows ([#148](https://github.com/AtomLinter/linter/pull/148), [#112](https://github.com/AtomLinter/linter/issue/112))
-* Also fix [#157](https://github.com/AtomLinter/linter/issues/157)
-
-
-# v0.5.6
-
-### Bug Fixes
-* Resolve too many linter warnings cover screen bug ([#132](https://github.com/AtomLinter/Linter/issues/132))
-
-# v0.5.3
-
-### New Linters
-* [linter-jsxhint](https://atom.io/packages/linter-jsxhint), for JSX (React.js), using `jsxhint`
-
-# v0.5.2
-
-### Bug Fixes
-* Only widen the gutter when showGutter is enabled ([#137](https://github.com/AtomLinter/Linter/issues/137))
-* Delete some unused imports ([#154](https://github.com/AtomLinter/Linter/issues/154))
-
-# v0.5.1
-
-### New Features
-* Add keybinding to trigger linting manually ([#146](https://github.com/AtomLinter/Linter/issues/146))
-
-# v0.5.0
-
-### Bug Fixes
-* Fix when line is deleted before it can be [hightlig…](https://github.com/AtomLinter/Linter/commit/01786d4ec4cc6a946bf09e4024e22b0dfad858c6)
-* fix typo ([showHightlighting -> showHighlighting](https://github.com/AtomLinter/Linter/commit/e06ad53bca201b108d5743b7966f8fad5050c74b))
-
-### New Features
-* Add `@formatMessage` to help any linter to customize message. ([#120](https://github.com/AtomLinter/Linter/pull/120))
-* Use decorations API to display gutter markers ([#147](https://github.com/AtomLinter/Linter/pull/147))
-* Better way to assemble path ([#142](https://github.com/AtomLinter/Linter/pull/142))
-
-# v0.4.11
-
-### Bug Fixes
-
-* Fix `getBufferPosition` bug ([#99](https://github.com/AtomLinter/Linter/issues/99))
-* Don't block UI more than 5s
-* Fix bug when running specs
-* Fix bug when full line error ([#103](https://github.com/AtomLinter/Linter/pull/103))
-
-# v0.4.10
----------
-
-### Bug Fixes
-
-* Fix bug when linter provides 0 length range
-* Fix a bug when special characters appeared in command ([#81](https://github.com/AtomLinter/Linter/pull/81))
-* Update `temp` package
-
-# v0.4.9
---------
-
-### New Features
-* Show error line and column if available in the status bar
-* Lint on focus ([#77](https://github.com/AtomLinter/Linter/pull/77))
-* Clicking error message copies it to clipboard ([#78](https://github.com/AtomLinter/Linter/issues/78))
-
-### Bug Fixes
-* Fix the error range construction and line reporting for line zero errors ([#35](https://github.com/AtomLinter/Linter/issues/35))
-* Fix modify interval config ([#64](https://github.com/AtomLinter/Linter/issues/64))
-* Close status bar on file close ([#74](https://github.com/AtomLinter/Linter/pull/74))
-* Fix double error reporting in status bar ([#79](https://github.com/AtomLinter/Linter/pull/79))
-
-### New Linters
-* [linter-scalac](https://atom.io/packages/linter-scalac), for Scala, using `scalac`
-
-
-# v0.4.8 (May 26, 2014)
------------------------
-
-### Bug Fixes
-* Lint on save wasn't triggered with save menu shortcut ([#40](https://github.com/AtomLinter/Linter/issues/40))
-* Not displaying results if cursor on EOF ([#50](https://github.com/AtomLinter/Linter/issues/50))
-* Previous highlights weren't cleared
-
-### Performance Improvements
-* Wait 1000ms between two lint on changes ([#32](https://github.com/AtomLinter/Linter/issues/32))
-
-### New Linters
-* [linter-pylint](https://atom.io/packages/linter-pylint), for Python, using `pylint`
+* Complete rewrite

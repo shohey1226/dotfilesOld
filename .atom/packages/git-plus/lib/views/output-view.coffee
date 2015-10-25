@@ -10,7 +10,6 @@ module.exports =
 
     initialize: ->
       super
-      @panel ?= atom.workspace.addBottomPanel(item: this)
 
     addLine: (line) ->
       @message += line
@@ -19,11 +18,11 @@ module.exports =
       @message = ''
 
     finish: ->
+      @panel ?= atom.workspace.addBottomPanel(item: this)
       @find(".output").append(@message)
       setTimeout =>
         @destroy()
       , atom.config.get('git-plus.messageTimeout') * 1000
 
     destroy: ->
-      debugger
-      @panel.destroy()
+      @panel?.destroy()

@@ -2,21 +2,19 @@
 
 git = require '../git'
 OutputView = require './output-view'
-StatusView = require './status-view'
+notifier = require '../notifier'
 SelectListMultipleView = require './select-list-multiple-view'
 
 module.exports =
 class SelectStageFilesView extends SelectListMultipleView
 
-  initialize: (items) ->
+  initialize: (@repo, items) ->
     super
     @show()
-
     @setItems items
     @focusFilterEditor()
 
-  getFilterKey: ->
-    'path'
+  getFilterKey: -> 'path'
 
   addButtons: ->
     viewButton = $$ ->
@@ -34,13 +32,12 @@ class SelectStageFilesView extends SelectListMultipleView
   show: ->
     @panel ?= atom.workspace.addModalPanel(item: this)
     @panel.show()
-
     @storeFocusedElement()
 
   cancelled: -> @hide()
 
   hide: ->
-    @panel?.hide()
+    @panel?.destroy()
 
   viewForItem: (item, matchedStr) ->
     $$ ->
@@ -52,7 +49,11 @@ class SelectStageFilesView extends SelectListMultipleView
   completed: (items) ->
     files = (item.path for item in items)
     @cancel()
-
     git.cmd
-      args: ['add', '-f'].concat(files),
-      stdout: (data) -> new StatusView(type: 'success', message: data)
+      args: ['add', '-f'].concat(files)
+      cwd: @repo.getWorkingDirectory()
+      stdout: (data) =>
+        if data is ''
+          notifier.addSuccess 'File(s) staged successfully'
+        else
+          notifier.addSuccess data

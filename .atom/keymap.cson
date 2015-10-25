@@ -23,3 +23,17 @@
 # This file uses CoffeeScript Object Notation (CSON).
 # If you are unfamiliar with CSON, you can read more about it here:
 # https://github.com/bevry/cson#what-is-cson
+'atom-workspace atom-text-editor:not([mini])':
+  'ctrl-i': 'editor:indent-selected-rows'
+
+'atom-text-editor':
+  'cmd-alt-l': 'editor:auto-indent'
+
+# autocomplete
+'atom-text-editor:not(mini).autocomplete-active':
+  'tab': 'autocomplete-plus:confirm'
+  'enter': 'autocomplete-plus:confirm'
+  'up': 'unset!'
+  'down': 'unset!'
+  'ctrl-p': 'core:move-up'
+  'ctrl-n': 'core:move-down'

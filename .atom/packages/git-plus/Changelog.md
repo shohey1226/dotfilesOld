@@ -1,9 +1,119 @@
 ## Changelog
 
+### 5.4.7
+- #269
+
+### 5.4.6
+ - Refactor to fix #266
+
+### 5.4.5
+- #265
+
+### 5.4.4
+- #263
+
+### 5.4.3
+- Add deactivate method to package
+- Refactoring
+
+### 5.4.2
+- #261
+
+### 5.4.1
+- #260: Destroy 'COMMIT_EDITMSG' pane not just editor
+
+### 5.4.0
+- #201: Add `Commit All` command. Equivalent of `git commit -a`
+
+### 5.3.5
+- #209: Only destroy textEditor for 'COMMIT_EDITMSG'
+
+### 5.3.4
+- unlink COMMIT_EDITMSG file after commits
+- Respect no 'open pane' setting with commit window
+
+### 5.3.3
+- #231: Shift-Enter confirms stage/unstage in dialogs
+
+### 5.3.2
+- Fix #226: remove COMMIT_EDITMSG file from repo when committing
+- Fix #228: Don't show color codes in diff when `color.ui=always`
+
+### 5.3.0
+- Fix #233 (@hotoiledgoblins)
+- Add 'Git checkout remote' to atom command palette
+- Respect `commit.template` config option
+
+### 5.2.4
+- Fix #243
+- Fix #42
+- Add 'push' command to context menu
+
+### 5.2.3
+- Make git-diff highlighting non-greedy. Thanks to @Victorystick
+
+### 5.2.2
+
+- fix 'Git log current file'
+
+### 5.2.1
+
+- add support for Git pull using rebase (@maxcnunes)
+- Git diff opens panes with respect to the 'open in pane' setting
+- Commit and diff won't explode if you don't have the spit panes option selected
+
+### 5.1.7
+
+- Git log command now works with submodules and different repos
+- new command: `Remote Checkout`
+
+### 5.1.2
+
+- #206: Fix for commit file syntax highlighting not working sometimes. (@Gwasanaethau)
+
+### 5.1.1
+
+- Fix for commands not working in submodules
+- Fix typos with 'Git Fetch Prune' (@Azakur4)
+
+### 5.1.0
+
+- The Split Pane direction setting actually works now.
+  > Possible choices are [right up down left]. Defaults to right.
+
+### 5.0.7
+
+- Fix #199
+- Fix #198
+- Fix #197
+
+### 5.0.4
+
+- Fix typo of 'notifer' to 'notifier'
+- Fix issue #139
+
+### 5.0.3
+
+- Treeview and StatusBar should update after git commands
+- No longer opening blank file on `Git show` if given an invalid object
+
+### 5.0.2
+
+- Fix typo of 'notifer' to 'notifier'
+- Brought back the `messageTimeout` setting for remaining StatusViews
+
+### 5.0.1
+
+- Major release to be compatible with atom 1.0.0
+- If a window has more than one project with a git repository and a command is attempted,
+  then you can choose which repo to manipulate.
+- New layout for commits in `Git log` command
+- Most StatusViews of command output have been moved to the new notificaton system in atom
+
 ### 4.5.0
 
 - Remove some more deprecations (@Azakur4)
-- New command `Git Add All And Push` (@TwanoO67)
+- New command `Git Add All Commit And Push` (@TwanoO67)
 
 ### 4.4.13
 

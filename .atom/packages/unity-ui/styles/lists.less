@@ -47,6 +47,15 @@
   }
 }
 
+.list-group .character-match {
+  color: @text-color-highlight;
+  font-weight: inherit;
+}
+
+.list-group .selected .character-match {
+  color: @background-color-highlight;
+}
+
 .select-list.popover-list {
   color:@text-color;
   box-shadow: 0  5px 20px fade(#000, 20%), fade(#000, 10%) 0 0 0 1px;
@@ -105,7 +114,6 @@
 
 .select-list ol.list-group,
 &.select-list ol.list-group {
-  border-radius:5px;
   overflow:hidden;
   background-clip:content-box;
   // We want to highlight the background of the list items because we dont
@@ -113,5 +121,19 @@
   li.selected {
     background-color: @background-color-selected;
     &:before{ display: none; }
+  }
+}
+
+.list-group {
+  .key-binding {
+    background-color:#eee;
+    margin-right:4px;
+    font-size:13px;
+    vertical-align: middle;
+  }
+
+  .selected .key-binding {
+    background:#fff;
+    color:#555;
   }
 }

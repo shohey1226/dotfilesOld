@@ -9,7 +9,15 @@
     ]
     audioBeep: false
     disabledPackages: [
-      "autocomplete-plus"
+      "resize-panes"
+      "resize-panes"
+      "ask-stack"
+      "term2"
+      "block-cursor"
+      "linter-erb"
+      "xml-formatter"
+      "script"
+      "web-browser"
     ]
   "filetype-color":
     enabled: "false"
@@ -18,7 +26,15 @@
     userId: "c913aae6-8a25-a8ea-b68d-2d0e623df09b"
   welcome:
     showOnStartup: false
-  linter: {}
+  linter:
+    ignoredLinterErrors: [
+      "jshint"
+      "htmlhint"
+    ]
+    lintOnChangeInterval: 3000
+    subtleLinterErrors: [
+      "ruby"
+    ]
   "block-cursor":
     primaryColor:
       red: 0
@@ -29,3 +45,13 @@
   term2:
     colors: {}
   "web-browser": {}
+  "markdown-preview": {}
+  react: {}
+  jshint:
+    supportLintingJsx: true
+  "xml-formatter": {}
+  "linter-jshint": {}
+  "linter-eslint":
+    globalNodePath: "/Users/kamesho/.nvm/versions/io.js/v3.0.0"
+    useGlobalEslint: true
+  "linter-htmlhint": {}
