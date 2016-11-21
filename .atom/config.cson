@@ -1,12 +1,13 @@
 "*":
-  editor:
-    invisibles: {}
-    fontSize: 12
+  "autocomplete-plus": {}
+  "block-cursor":
+    blinkInterval: 0
+    primaryColor:
+      alpha: 1
+      blue: 0
+      green: 249
+      red: 0
   core:
-    themes: [
-      "atom-dark-ui"
-      "railscast-theme"
-    ]
     audioBeep: false
     disabledPackages: [
       "resize-panes"
@@ -18,14 +19,23 @@
       "xml-formatter"
       "script"
       "web-browser"
+      "minimap"
+      "linter-eslint"
     ]
-  "filetype-color":
-    enabled: "false"
-  "autocomplete-plus": {}
+    telemetryConsent: "limited"
+    themes: [
+      "atom-dark-ui"
+      "railscast-theme"
+    ]
+  editor:
+    fontSize: 12
+    invisibles: {}
   "exception-reporting":
     userId: "c913aae6-8a25-a8ea-b68d-2d0e623df09b"
-  welcome:
-    showOnStartup: false
+  "filetype-color":
+    enabled: "false"
+  jshint:
+    supportLintingJsx: true
   linter:
     ignoredLinterErrors: [
       "jshint"
@@ -35,23 +45,16 @@
     subtleLinterErrors: [
       "ruby"
     ]
-  "block-cursor":
-    primaryColor:
-      red: 0
-      green: 249
-      blue: 0
-      alpha: 1
-    blinkInterval: 0
-  term2:
-    colors: {}
-  "web-browser": {}
-  "markdown-preview": {}
-  react: {}
-  jshint:
-    supportLintingJsx: true
-  "xml-formatter": {}
-  "linter-jshint": {}
   "linter-eslint":
     globalNodePath: "/Users/kamesho/.nvm/versions/io.js/v3.0.0"
     useGlobalEslint: true
   "linter-htmlhint": {}
+  "linter-jshint": {}
+  "markdown-preview": {}
+  react: {}
+  term2:
+    colors: {}
+  "web-browser": {}
+  welcome:
+    showOnStartup: false
+  "xml-formatter": {}

@@ -1,25 +1,25 @@
-Goodie:
-  title: "Goodie"
+Monotodo:
+  title: "Monotodo"
   paths: [
-    "/Users/kamesho/git/Goodie"
+    "/Users/shohey1226/git/Monotodo"
   ]
 gsaweb:
   title: "gsaweb"
   paths: [
-    "/Users/kamesho/git/gsaweb"
+    "/Users/shohey1226/git/gsaweb"
   ]
-Chifan:
-  title: "Chifan"
+Gauss:
+  title: "Gauss"
   paths: [
-    "/Users/kamesho/git/Chifan"
+    "/Users/shohey1226/git/Gauss"
   ]
-Wiredify:
-  title: "Wiredify"
+RNMonotodo:
+  title: "RNMonotodo"
   paths: [
-    "/Users/kamesho/git/Wiredify"
+    "/Users/shohey1226/git/RNMonotodo"
   ]
-Instravel:
-  title: "Triplenty"
+clover:
+  title: "colver"
   paths: [
-    "/Users/kamesho/git/Triplenty"
+    "/Users/shohey1226/git/clover"
   ]

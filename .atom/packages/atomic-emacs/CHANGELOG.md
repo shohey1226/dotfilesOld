@@ -1,3 +1,32 @@
+## 0.9.2 (2016-06-18)
+
+* Fix scroll-{up,down} in an empty editor.
+
+## 0.9.1 (2016-03-26)
+
+* New bindings:
+  * ctrl-x ctrl-c: application:quit [Josh Meyer]
+  * ctrl-x u: core:undo [Josh Meyer]
+* copy-region-as-kill writes to clipboard, like other kill commands. [Yuichi
+  Tanikawa]
+* Fix selection disappearing when moving past the ends of the buffer.
+* Added note to readme about key binding collisions on Windows.
+
+## 0.9.0 (2016-01-02)
+
+* Updated readme.
+* Killing and yanking commands, multi-cursor aware. See readme for details.
+* transpose-{chars,words,lines} now works with multiple cursors.
+* Add "alt-g alt-g" as an alias for go-to-line:toggle.
+* Fix delete-indentation.
+* Fix issue with selection jumping erratically when moving after a mark-sexp.
+* open-line no longer jumps to the start of the line.
+* Fix undo behavior of just-one-space, {{up,down}case,capitalize}-word-or-region.
+
+## 0.8.0 (2015-12-03)
+* C-v, M-v now consistently moves half a screen up/down.
+* C-l now cycles through middle-top-bottom, like Emacs' default.
+
 ## 0.7.4 (2015-10-05)
 * C-g now cancels auto-complete and multiple cursors, like escape.
 

@@ -82,6 +82,4 @@ export PS1='${USER}@${HOSTNAME}:${PWD}> '
 alias rm='rm -i'
 alias psg='ps -ef | grep -v grep | grep '
 
-# Perlbrew
-source /home/kamesho/perl5/perlbrew/etc/bashrc
 

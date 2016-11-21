@@ -1,46 +1,68 @@
 {
-  "name": "xml-formatter",
-  "main": "./lib/xml-formatter",
-  "version": "0.9.0",
-  "description": "XML Formatter",
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/gb/zt7l3qcd2qj54ygj91yd_5qr0000gn/T/d-1161018-3752-sbslja/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/gb/zt7l3qcd2qj54ygj91yd_5qr0000gn/T/d-1161018-3752-sbslja/package.tgz",
+        "spec": "/private/var/folders/gb/zt7l3qcd2qj54ygj91yd_5qr0000gn/T/d-1161018-3752-sbslja/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/gb/zt7l3qcd2qj54ygj91yd_5qr0000gn/T/apm-install-dir-1161018-3752-xjvef0"
+    ]
+  ],
+  "_from": "../d-1161018-3752-sbslja/package.tgz",
+  "_id": "xml-formatter@0.10.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/xml-formatter",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/gb/zt7l3qcd2qj54ygj91yd_5qr0000gn/T/d-1161018-3752-sbslja/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/gb/zt7l3qcd2qj54ygj91yd_5qr0000gn/T/d-1161018-3752-sbslja/package.tgz",
+    "spec": "/private/var/folders/gb/zt7l3qcd2qj54ygj91yd_5qr0000gn/T/d-1161018-3752-sbslja/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-1161018-3752-sbslja/package.tgz",
+  "_shasum": "ac264313c9d751c1528f713fd4e5ac2f77c3767b",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/gb/zt7l3qcd2qj54ygj91yd_5qr0000gn/T/d-1161018-3752-sbslja/package.tgz",
+  "_where": "/private/var/folders/gb/zt7l3qcd2qj54ygj91yd_5qr0000gn/T/apm-install-dir-1161018-3752-xjvef0",
   "activationCommands": {
     "atom-workspace": [
       "xml-formatter:indent"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/neyestrabelli/xml-formatter"
-  },
-  "license": "MIT",
-  "engines": {
-    "atom": ">0.50.0"
-  },
-  "dependencies": {},
-  "readme": "# xml-formatter package\n\nSimple XML Formatter, hit `CMD-SHIFT-X`.\n\n## Preview\n\n![Format in Action 2](http://www.neyestrabelli.com/arquivos/xml-formatter3.gif)\n",
-  "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/neyestrabelli/xml-formatter/issues"
   },
-  "homepage": "https://github.com/neyestrabelli/xml-formatter",
-  "_id": "xml-formatter@0.9.0",
+  "dependencies": {},
+  "description": "XML Formatter",
+  "devDependencies": {},
   "dist": {
     "shasum": "b65dc3311cf57655cfd43ec33470f453a7577c8a"
   },
-  "_resolved": "file:../d-115528-75941-vmj3tp/package.tgz",
-  "_from": "../d-115528-75941-vmj3tp/package.tgz",
-  "_shasum": "5f39c2398fb86d8face7cdcc11fc898decbe68d5",
-  "_atomModuleCache": {
-    "version": 1,
-    "dependencies": [],
-    "extensions": {
-      ".coffee": [
-        "lib/xml-formatter.coffee"
-      ],
-      ".json": [
-        "package.json"
-      ]
-    },
-    "folders": []
-  }
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "homepage": "https://github.com/neyestrabelli/xml-formatter",
+  "license": "MIT",
+  "main": "./lib/xml-formatter",
+  "name": "xml-formatter",
+  "optionalDependencies": {},
+  "readme": "# xml-formatter package\n\nSimple XML Formatter, hit `CMD-SHIFT-X`.\n\n## Preview\n\n![Format in Action 2](http://www.neyestrabelli.com/arquivos/xml-formatter3.gif)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neyestrabelli/xml-formatter.git"
+  },
+  "version": "0.10.0"
 }

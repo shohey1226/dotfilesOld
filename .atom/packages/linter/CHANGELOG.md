@@ -1,3 +1,96 @@
+## 1.11.16
+
+- Follow up to last fix
+
+## 1.11.15
+
+- Fix compatibility with latest coffee upgrade in upcoming Atom v1.12
+
+## 1.11.14
+
+- Make sure errors are hidden in panel (Atom Beta broke `[hidden]` styles)
+
+## 1.11.13
+
+- Fix for bottom tabs not hiding in Atom 1.10.x beta
+
+## 1.11.12
+
+- Possible fix for an issue reported in #1002
+
+## 1.11.11
+
+- Fix bubble not re-rendering when messages were updated (Fixes #1002)
+
+## 1.11.10
+
+- Fix a typo introduced by last release
+
+## 1.11.9
+
+- Make tooltip invalidatable (Fixes a bug reported in #1002)
+
+## 1.11.8
+
+- Remove bubble properly when all errors have been fixed
+- Fix another bug with bubble (#1177)
+
+## 1.11.7
+
+- Show error tooltip on cursor position
+
+## 1.11.6
+
+- Fix a bug where messages without a range would crash bubble
+
+## 1.11.5
+
+- Fix cannot decorate destroyed marker error
+- Fix support for incrementally adding messages
+
+## 1.11.4
+
+* Make the panel copy compatible with latest version of electron
+
+## 1.11.3
+
+* Fix a typo that didn't let `linter-indie` service to work
+
+## 1.11.2
+
+* Fix a bug where HTMLElements as `html` property on messages would be mistaken as incorrect.
+
+## 1.11.1
+
+* Revert notification for when no providers are installed.
+
+## 1.11.0
+
+* A notification is shown to user if no linter providers are installed.
+* A better self-API for PUSH style providers. Check the wiki for more information.
+
+## 1.10.0
+
+* Fix a minor style issue in bottom tabs
+* Add a new `displayLinterStatus` config
+
+## 1.9.1
+
+* Add `ignoreMatchedFiles` config
+* Fix an issue where the `linter.displayLinterInfo` preference was not respected
+
+## 1.9.0
+
+* Fix compatibility with upcoming version of atom
+* Support for buffer modifying linters has been removed (We don't think anybody was using them anyway)
+* Add a new `inlineTooltipInterval` config
+* Major speed improvements
+* Make ctrl-c work on bottom panel
+* Fix certain scenarios where inline bubbles would be placed incorrectly (Bubbles no longer follow the cursor, they re-use markers from underlines)
+* Add a new `lintOnFlyInterval` config
+* Messages of a single editor are now shown together
+* Add a new `ignoreVCSIgnoredFiles` config
+
 ## 1.8.1
 
 * Workaround an atom bug where moving an editor between panes would throw an error
@@ -13,7 +106,7 @@
 * Aligned bottom panel buttons
 * Made the text in the bottom panel selectable
 * Linter bottom panel is now resizable (Drag the height down to 0 to reset your changes)
-* Add a new `class` attribute for providers (when class is provided, no class is automatically added).
+* Add a new `class` attribute for provider messages (when class is provided, no class is automatically added).
 * Fix linter gutter dot alignment across themes and zoom level.
 
 ## 1.7.2

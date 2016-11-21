@@ -1,5 +1,117 @@
 # Changelog
 
+## 3.3.3
+Fixed an issue when the projects file was empty.
+
+## 3.3.2
+- Added back the check to see if the path exists in a project. You can however still open it which you couldn't before.
+- Added a link to the documentation about `devMode`.
+
+And some other fixes behind the scenes :)
+
+## 3.3.1
+- Deploy seems to be broken so this is pretty much 3.3.0.
+
+## 3.3.0
+- Added option to save paths relative to home dir.
+- Fixed bug that would change a relative path to absolute when saving a project.
+- The Prettify Title option now works again.
+
+And some other things and corrections.
+
+## 3.2.5
+Now automatically closes the edit/save view on save and restores focus to whatever had focus last.
+
+## 3.2.4
+- Added `Project Manager: Update Projects` command that for example can be used to include a new git repository without having to reload Atom.
+- Added a notification when saving or editing a project.
+- Added a notification for when a syntax error is found in `projects.cson`.
+- Only properties that have been changed on a project is now saved to keep `projects.cson` a bit more clean.
+
+## 3.2.3
+Fixes [#260](https://github.com/danielbrodin/atom-project-manager/issues/260)
+
+## 3.2.2
+Fixes the sorting option.
+
+## 3.2.1
+Fixes [#259](https://github.com/danielbrodin/atom-project-manager/issues/259)
+
+## 3.2.0
+Added a new setting for reversing the effect of `shift+enter` in the list view, so it will default to open in the same window.
+
+## 3.1.0
+Added a method to save a project in the provider. Check the readme for more info.
+
+## 3.0.1
+Fixed an issue that prevent the settings from being loaded.
+
+## 3.0.0
+This release features a complete rewrite and structure that should hopefully fix some bugs. Make sure to reload Atom after the update.
+
+Some of the new features include:
+- A new setting to include git repositories found in your `core.projectHome` directory.
+- You can now open a project with `shift + enter` which will open it in the current window.
+- The start of a new project edit mode. `Project Manager: Edit Project` in the command palette. It currently only features some of the fields, but everything should be added.
+- A new structure in the `projects.cson` file. Finally rid of the unnecessary object key :) Your file will be updated the first time you save a project.
+- The templates integration isn't 100% yet, but it's there.
+
+Please report any bugs you find, but first make sure you have reloaded Atom.
+
+## 2.9.7
+Apm seem to have screwed up with publishing.
+
+## 2.9.6
+Missed including a node package.
+
+## 2.9.5
+Recursion should be fixed now.
+
+## 2.9.4
+Fix recursion that could happen in some cases.
+
+## 2.9.3
+Just publishing to add the correct changelog. See 2.9.1
+
+## 2.9.2
+This is really 2.9.1 but a git issue messed up the version number.
+
+## 2.9.1
+- Fixes [#209](https://github.com/danielbrodin/atom-project-manager/issues/209)
+- Now adds and removes paths when added to the projects settings.
+
+## 2.9.0
+- Added some prettifying of autosuggested project title.
+- Bugfixes
+
+## 2.8.0
+- You can now sort projects by the last modification date of the root path.
+- The Project Manager will now look for a local settings file (`project.cson`) for the currently active project and merge the settings with what's in `projects.cson`.
+- Plus some other behind the scenes stuff which could mean you have to restart Atom for everything to work as it should.
+Thanks to [@mrodalgaard](https://github.com/mrodalgaard) for one of the fixes.
+
+## 2.7.6
+Fix [#195](https://github.com/danielbrodin/atom-project-manager/issues/195)
+
+## 2.7.5
+Bugfix
+
+## 2.7.4
+Now adds back focus to editor when closing the project list view.
+
+## 2.7.3
+Fixes [#143](https://github.com/danielbrodin/atom-project-manager/issues/143)
+
+## 2.7.2
+Fixes [#185](https://github.com/danielbrodin/atom-project-manager/issues/185) and [#182](https://github.com/danielbrodin/atom-project-manager/issues/182)
+
+## 2.7.1
+Fixes [#180](https://github.com/danielbrodin/atom-project-manager/issues/180)
+
+## 2.7.0
+- The option to close the current window when opening a new project is now back. Still not a great implementation but the old one seems to work again.
+- The project listing will now warn you if a projects path is not available.
+
 ## 2.6.5
 Fixes [#163](https://github.com/danielbrodin/atom-project-manager/issues/163)
 

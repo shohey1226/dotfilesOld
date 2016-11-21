@@ -5,16 +5,16 @@ nnoremap <C-n> gt
 nnoremap <C-p> gT
  
 set rtp+=~/.vim/vundle.git/
-call vundle#rc()
+"call vundle#rc()
 
-Bundle 'Shougo/neocomplcache'
+"Bundle 'Shougo/neocomplcache'
 "Bundle 'petdance/vim-perl'
-Bundle 'hotchpotch/perldoc-vim'
+"Bundle 'hotchpotch/perldoc-vim'
 "JSLint
-Bundle 'basyura/jslint.vim'
+"Bundle 'basyura/jslint.vim'
 
 "color
-Bundle 'tomasr/molokai'
+"Bundle 'tomasr/molokai'
  
 " Examples
 " vim-scripts リポジトリ (1)
