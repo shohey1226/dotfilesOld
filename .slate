@@ -1,0 +1,47 @@
+## Monitor Aliases
+alias mon-laptop   1    # variable for my laptop monitor
+alias mon-iiyama   0    # my external HP monitor
+
+## Window Position Regions
+alias iiyama-full       move screenOriginX;screenOriginY screenSizeX;screenSizeY         ${mon-iiyama}
+alias iiyama-top        move screenOriginX;screenOriginY screenSizeX;screenSizeY/3       ${mon-iiyama}
+alias iiyama-bottom     move screenOriginX;screenOriginY+screenSizeY/3 screenSizeX;2*screenSizeY/3         ${mon-iiyama}
+alias laptop-full        move screenOriginX;screenOriginY screenSizeX;screenSizeY         ${mon-laptop}
+alias laptop-left        move screenOriginX;screenOriginY screenSizeX/2;screenSizeY         ${mon-laptop}
+alias laptop-right       move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY         ${mon-laptop}
+alias laptop-righttop    move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY/2       ${mon-laptop}
+alias laptop-rightbottom move screenOriginX+screenSizeX/2;screenOriginY+screenSizeY/2    screenSizeX/2;screenSizeY/2       ${mon-laptop}
+
+## Window layouts for when I have 2 monitors
+layout 2monitor 'Google Chrome':REPEAT ${iiyama-bottom}
+layout 2monitor 'iTerm2':REPEAT ${iiyama-top}
+layout 2monitor 'Sublime Text':REPEAT ${laptop-full}
+##layout 2monitor 'iCal':REPEAT ${iiyama-full}
+##layout 2monitor 'Coda':REPEAT ${iiyama-full}
+##layout 2monitor 'Mail':REPEAT ${laptop-full}
+##layout 2monitor 'Rdio':REPEAT ${laptop-full}
+##layout 2monitor 'Spotify':REPEAT ${laptop-full}
+##layout 2monitor 'Evernote':REPEAT ${laptop-full}
+#
+## Single monitor window layouts
+layout 1monitor 'Sublime Text':REPEAT ${laptop-full}
+layout 1monitor 'Google Chrome':REPEAT ${laptop-full}
+layout 1monitor 'Sublime Text':REPEAT ${laptop-full}
+
+## Keyboard shortcuts for each layout
+bind l:shift;ctrl layout 2monitor
+#bind g:shift;ctrl grid padding:5 0:2,1 1:2,2
+
+## Auto-detect when a monitor is plugged in or out
+default 2monitor count:2
+default 1monitor count:1
+
+
+# This is the default .slate file.
+# If no ~/.slate file exists this is the file that will be used.
+config defaultToCurrentScreen true
+config windowHintsShowIcons true
+config windowHintsIgnoreHiddenWindows false
+config windowHintsSpread true
+
+bind e:cmd hint ASDFGHJKLQWERTYUIOPCVBN

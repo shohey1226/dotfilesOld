@@ -15,12 +15,10 @@
       "ask-stack"
       "term2"
       "block-cursor"
-      "linter-erb"
       "xml-formatter"
       "script"
       "web-browser"
       "minimap"
-      "linter-eslint"
     ]
     telemetryConsent: "limited"
     themes: [
@@ -28,10 +26,13 @@
       "railscast-theme"
     ]
   editor:
-    fontSize: 12
+    fontSize: 13
     invisibles: {}
   "exception-reporting":
     userId: "c913aae6-8a25-a8ea-b68d-2d0e623df09b"
+  "file-types":
+    erb: "text.html.ruby"
+    rb: "source.ruby.rails"
   "filetype-color":
     enabled: "false"
   jshint:
@@ -46,9 +47,17 @@
       "ruby"
     ]
   "linter-eslint":
-    globalNodePath: "/Users/kamesho/.nvm/versions/io.js/v3.0.0"
+    globalNodePath: "/usr/local"
     useGlobalEslint: true
-  "linter-htmlhint": {}
+  "linter-htmlhint":
+    enabledScopes: [
+      "text.html.angular"
+      "text.html.basic"
+      "text.html.gohtml"
+      "text.html.jsp"
+      "text.html.mustache"
+      "text.html.ruby"
+    ]
   "linter-jshint": {}
   "markdown-preview": {}
   react: {}

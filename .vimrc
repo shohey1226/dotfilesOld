@@ -139,14 +139,14 @@ setlocal iskeyword+=:
 "=========================================
 " JSLint
 "=========================================
-augroup MyGroup
-  autocmd! MyGroup
-  autocmd FileType javascript call s:javascript_filetype_settings()
-augroup END
-
-function! s:javascript_filetype_settings()
-  autocmd BufLeave     <buffer> call jslint#clear()
-  autocmd BufWritePost <buffer> call jslint#check()
-  autocmd CursorMoved  <buffer> call jslint#message()
-endfunction
-
+"augroup MyGroup
+"  autocmd! MyGroup
+"  autocmd FileType javascript call s:javascript_filetype_settings()
+"augroup END
+"
+"function! s:javascript_filetype_settings()
+"  autocmd BufLeave     <buffer> call jslint#clear()
+"  autocmd BufWritePost <buffer> call jslint#check()
+"  autocmd CursorMoved  <buffer> call jslint#message()
+"endfunction
+"

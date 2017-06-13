@@ -77,9 +77,18 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
-export LANG=en_US.utf8
+export LANG='ja_JP.UTF-8'
 export PS1='${USER}@${HOSTNAME}:${PWD}> '
+export EDITOR='vim'
 alias rm='rm -i'
 alias psg='ps -ef | grep -v grep | grep '
 
+export NVM_DIR="/Users/shohey1226/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
+# android studio (react native)
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+
+function emulator { (cd "$(dirname "$(which emulator)")" && ./emulator "$@"); }
