@@ -40,6 +40,19 @@ if dein#load_state($HOME . '/.cache/dein')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 
+  call denite#custom#var('file/rec', 'command',  ['ag', '--follow', '--nocolor', '--nogroup', '-g', '']) 
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+      \ [ '*~', '*.o', '*.exe', '*.bak',
+      \ '.DS_Store', '*.pyc', '*.sw[po]', '*.class',
+      \ '.hg/', '.git/', '.bzr/', '.svn/',
+      \ 'node_modules/', 'bower_components/', 'tmp/', 'log/', 'vendor/ruby',
+      \ '.idea/', 'dist/',
+      \ 'tags', 'tags-*'])
+  call denite#custom#map('insert', '<C-N>', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('insert', '<C-P>', '<denite:move_to_previous_line>', 'noremap')
+
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -75,7 +88,23 @@ let g:deoplete#enable_at_startup = 1
 
 " tree view
 "autocmd vimenter * NERDTree
-nmap <silent> <C-D> :NERDTreeToggle<CR>
+nmap <silent> <C-E> :NERDTreeToggle<CR>
 
 "keymapping
+nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
+nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
+nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
+nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
+nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
+nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
+nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
+nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
+
+" backup to ~/.tmp -
+" https://stackoverflow.com/questions/821902/disabling-swap-files-creation-in-vim
+set backup 
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
+set backupskip=/tmp/*,/private/tmp/* 
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
+set writebackup
 
