@@ -25,7 +25,8 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('vim-airline/vim-airline-themes')
 
   "theme
-  call dein#add('morhetz/gruvbox')
+  "call dein#add('morhetz/gruvbox')
+  call dein#add('flazz/vim-colorschemes')
 
   " display tree
   call dein#add('scrooloose/nerdtree')
@@ -74,15 +75,14 @@ set autoindent
 set expandtab
 setlocal tabstop=2 shiftwidth=2 smarttab
 filetype plugin indent on
-
+set number
  
 "theming
-syntax on
-colorscheme gruvbox 
+syntax enable 
+colorscheme dracula 
 set background=dark
 set t_Co=256
 let g:airline_theme = 'wombat'
-
 
 let g:deoplete#enable_at_startup = 1
 
@@ -107,4 +107,3 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/* 
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
 set writebackup
-
