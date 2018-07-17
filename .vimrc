@@ -31,8 +31,11 @@ if dein#load_state($HOME . '/.cache/dein')
   " display tree
   call dein#add('scrooloose/nerdtree')
 
-  " 
+  " file search 
   call dein#add('Shougo/denite.nvim')
+
+  " ruby
+  call dein#add('osyo-manga/vim-monster', { 'on_ft': 'ruby' })
 
   " autocompletion
   call dein#add('Shougo/deoplete.nvim')
@@ -42,7 +45,7 @@ if dein#load_state($HOME . '/.cache/dein')
   endif
 
   call denite#custom#var('file/rec', 'command',  ['ag', '--follow', '--nocolor', '--nogroup', '-g', '']) 
-  call denite#custom#var('grep', 'command', ['ag'])
+  "call denite#custom#var('grep', 'command', ['ag'])
   call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
       \ [ '*~', '*.o', '*.exe', '*.bak',
       \ '.DS_Store', '*.pyc', '*.sw[po]', '*.class',
@@ -76,6 +79,12 @@ set expandtab
 setlocal tabstop=2 shiftwidth=2 smarttab
 filetype plugin indent on
 set number
+
+" for ruby
+:autocmd Filetype ruby set softtabstop=2
+:autocmd Filetype ruby set sw=2
+:autocmd Filetype ruby set ts=2
+
  
 "theming
 syntax enable 
