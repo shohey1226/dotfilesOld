@@ -45,7 +45,16 @@ if dein#load_state($HOME . '/.cache/dein')
   endif
 
   call denite#custom#var('file/rec', 'command',  ['ag', '--follow', '--nocolor', '--nogroup', '-g', '']) 
-  "call denite#custom#var('grep', 'command', ['ag'])
+
+  " Ripgrep command on grep source
+  call denite#custom#var('grep', 'command', ['rg'])
+  call denite#custom#var('grep', 'default_opts',
+                  \ ['--vimgrep', '--no-heading'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+
   call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
       \ [ '*~', '*.o', '*.exe', '*.bak',
       \ '.DS_Store', '*.pyc', '*.sw[po]', '*.class',
@@ -91,6 +100,7 @@ syntax enable
 colorscheme dracula 
 set background=dark
 set t_Co=256
+set langmenu=en_US.UTF-8
 let g:airline_theme = 'wombat'
 
 let g:deoplete#enable_at_startup = 1
