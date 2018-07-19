@@ -30,6 +30,7 @@ if dein#load_state($HOME . '/.cache/dein')
 
   " display tree
   call dein#add('scrooloose/nerdtree')
+  call dein#add('jistr/vim-nerdtree-tabs')
 
   " file search 
   call dein#add('Shougo/denite.nvim')
@@ -126,3 +127,4 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/* 
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
 set writebackup
+
