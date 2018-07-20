@@ -105,6 +105,10 @@ set langmenu=en_US.UTF-8
 let g:airline_theme = 'wombat'
 
 let g:deoplete#enable_at_startup = 1
+" change color of popup menu
+highlight Pmenu ctermbg=8 guibg=#606060
+highlight PmenuSel ctermbg=1 guifg=#dddd00 guibg=#1f82cd
+highlight PmenuSbar ctermbg=0 guibg=#d6d6d6
 
 " tree view
 "autocmd vimenter * NERDTree
