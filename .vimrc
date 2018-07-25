@@ -112,7 +112,9 @@ highlight PmenuSbar ctermbg=0 guibg=#d6d6d6
 
 " tree view
 "autocmd vimenter * NERDTree
-nmap <silent> <C-E> :NERDTreeToggle<CR>
+"autocmd VimEnter * NERDTree | wincmd p
+nmap <silent> <C-E> :NERDTreeToggle %<CR>
+"autocmd BufEnter * lcd %:p:h
 
 "keymapping
 nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
