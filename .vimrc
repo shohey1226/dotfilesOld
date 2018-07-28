@@ -134,3 +134,5 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
 set writebackup
 
+" For Japanese
+set ambiwidth=double
