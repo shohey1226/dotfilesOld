@@ -99,6 +99,7 @@ set number
 "theming
 syntax enable 
 colorscheme dracula 
+"colorscheme molokai 
 set background=dark
 set t_Co=256
 set langmenu=en_US.UTF-8
@@ -134,3 +135,8 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
 set writebackup
 
+" speed up
+let loaded_matchparen = 1
+set ttyfast
+set lazyredraw
+"set nocul!
