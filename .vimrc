@@ -32,6 +32,9 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('scrooloose/nerdtree')
   call dein#add('jistr/vim-nerdtree-tabs')
 
+  " tabline
+  call dein#add('mkitt/tabline.vim')
+
   " file search 
   call dein#add('Shougo/denite.nvim')
 
@@ -110,6 +113,9 @@ let g:deoplete#enable_at_startup = 1
 highlight Pmenu ctermbg=8 guibg=#606060
 highlight PmenuSel ctermbg=1 guifg=#dddd00 guibg=#1f82cd
 highlight PmenuSbar ctermbg=0 guibg=#d6d6d6
+hi TabLine      ctermfg=DarkGreen  ctermbg=DarkGray cterm=NONE
+hi TabLineFill  ctermfg=DarkGreen  ctermbg=DarkGray cterm=NONE
+hi TabLineSel   ctermfg=White  ctermbg=DarkGreen cterm=NONE
 
 " tree view
 "autocmd vimenter * NERDTree
