@@ -24,6 +24,9 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
 
+  " reopen at the last edit postion
+  call dein#add('farmergreg/vim-lastplace')
+
   "theme
   "call dein#add('morhetz/gruvbox')
   call dein#add('flazz/vim-colorschemes')
@@ -113,9 +116,9 @@ let g:deoplete#enable_at_startup = 1
 highlight Pmenu ctermbg=8 guibg=#606060
 highlight PmenuSel ctermbg=1 guifg=#dddd00 guibg=#1f82cd
 highlight PmenuSbar ctermbg=0 guibg=#d6d6d6
-hi TabLine      ctermfg=DarkGreen  ctermbg=DarkGray cterm=NONE
-hi TabLineFill  ctermfg=DarkGreen  ctermbg=DarkGray cterm=NONE
-hi TabLineSel   ctermfg=White  ctermbg=DarkGreen cterm=NONE
+hi TabLine      ctermfg=White  ctermbg=DarkGray cterm=NONE
+hi TabLineFill  ctermfg=White  ctermbg=DarkGray cterm=NONE
+hi TabLineSel   ctermfg=Black  ctermbg=DarkGreen cterm=NONE
 
 " tree view
 "autocmd vimenter * NERDTree
