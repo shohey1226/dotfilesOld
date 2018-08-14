@@ -2,6 +2,12 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
+" loading issue - https://github.com/vim/vim/issues/3117
+" https://github.com/roxma/vim-hug-neovim-rpc/issues/32
+if has('python3')
+  silent! python3 1
+endif
+
 " Required:
 set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
@@ -90,16 +96,17 @@ endif
 "===== start config =====
 
 set encoding=utf-8
-set autoindent
 set expandtab
-setlocal tabstop=2 shiftwidth=2 smarttab
+set softtabstop=2
+set shiftwidth=2
 filetype plugin indent on
+set autoindent
 set number
 
 " for ruby
-:autocmd Filetype ruby set softtabstop=2
-:autocmd Filetype ruby set sw=2
-:autocmd Filetype ruby set ts=2
+"::autocmd Filetype ruby set softtabstop=2
+"::autocmd Filetype ruby set sw=2
+"::autocmd Filetype ruby set ts=2
 
  
 "theming
@@ -112,6 +119,7 @@ set langmenu=en_US.UTF-8
 let g:airline_theme = 'wombat'
 
 let g:deoplete#enable_at_startup = 1
+
 " change color of popup menu
 highlight Pmenu ctermbg=8 guibg=#606060
 highlight PmenuSel ctermbg=1 guifg=#dddd00 guibg=#1f82cd
