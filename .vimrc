@@ -127,6 +127,8 @@ highlight PmenuSbar ctermbg=0 guibg=#d6d6d6
 hi TabLine      ctermfg=White  ctermbg=DarkGray cterm=NONE
 hi TabLineFill  ctermfg=White  ctermbg=DarkGray cterm=NONE
 hi TabLineSel   ctermfg=Black  ctermbg=DarkGreen cterm=NONE
+nnoremap H gT
+nnoremap L gt
 
 " tree view
 "autocmd vimenter * NERDTree
