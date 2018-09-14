@@ -57,17 +57,28 @@ if dein#load_state($HOME . '/.cache/dein')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 
-  call denite#custom#var('file/rec', 'command',  ['ag', '--follow', '--nocolor', '--nogroup', '-g', '']) 
 
-  " Ripgrep command on grep source
-  call denite#custom#var('grep', 'command', ['rg'])
-  call denite#custom#var('grep', 'default_opts',
-                  \ ['--vimgrep', '--no-heading'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
+  if executable('rg')
+    call denite#custom#var('file/rec', 'command',
+          \ ['rg', '--files', '--glob', '!.git'])
+    call denite#custom#var('grep', 'command', ['rg', '--threads', '1'])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'final_opts', [])
+    call denite#custom#var('grep', 'separator', ['--'])
+    call denite#custom#var('grep', 'default_opts',
+          \ ['--vimgrep', '--no-heading'])
 
+    call denite#custom#var('grep',     'command', ['rg'])
+    call denite#custom#var('grep',     'default_opts', ['--hidden', '--vimgrep', '--no-heading', '-S'])
+    call denite#custom#var('grep',     'recursive_opts', [])
+    call denite#custom#var('grep',     'final_opts',   [])
+
+  else
+    call denite#custom#var('file/rec', 'command',
+          \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+  endif
+
+  call denite#custom#source('file_rec', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
   call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
       \ [ '*~', '*.o', '*.exe', '*.bak',
       \ '.DS_Store', '*.pyc', '*.sw[po]', '*.class',
