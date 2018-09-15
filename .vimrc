@@ -44,6 +44,10 @@ if dein#load_state($HOME . '/.cache/dein')
   " tabline
   call dein#add('mkitt/tabline.vim')
 
+  " session
+  call dein#add('xolox/vim-misc')
+  call dein#add('xolox/vim-session')
+
   " file search 
   call dein#add('Shougo/denite.nvim')
 
@@ -133,6 +137,10 @@ set langmenu=en_US.UTF-8
 let g:airline_theme = 'wombat'
 
 let g:deoplete#enable_at_startup = 1
+
+" session
+let g:session_autosave = 'no'
+let g:session_autoload = 'no'
 
 " change color of popup menu
 highlight Pmenu ctermbg=8 guibg=#606060
