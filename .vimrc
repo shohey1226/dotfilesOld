@@ -61,37 +61,42 @@ if dein#load_state($HOME . '/.cache/dein')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 
+  "
+  "call dein#add('ctrlpvim/ctrlp.vim')
+  "
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
-  if executable('rg')
-    call denite#custom#var('file/rec', 'command',
-          \ ['rg', '--files', '--glob', '!.git'])
-    call denite#custom#var('grep', 'command', ['rg', '--threads', '1'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'final_opts', [])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'default_opts',
-          \ ['--vimgrep', '--no-heading'])
+  "if executable('rg')
+  "  call denite#custom#var('file/rec', 'command',
+  "        \ ['rg', '--files', '--glob', '!.git'])
+  "  call denite#custom#var('grep', 'command', ['rg', '--threads', '1'])
+  "  call denite#custom#var('grep', 'recursive_opts', [])
+  "  call denite#custom#var('grep', 'final_opts', [])
+  "  call denite#custom#var('grep', 'separator', ['--'])
+  "  call denite#custom#var('grep', 'default_opts',
+  "        \ ['--vimgrep', '--no-heading'])
 
-    call denite#custom#var('grep',     'command', ['rg'])
-    call denite#custom#var('grep',     'default_opts', ['--hidden', '--vimgrep', '--no-heading', '-S'])
-    call denite#custom#var('grep',     'recursive_opts', [])
-    call denite#custom#var('grep',     'final_opts',   [])
+  "  call denite#custom#var('grep',     'command', ['rg'])
+  "  call denite#custom#var('grep',     'default_opts', ['--hidden', '--vimgrep', '--no-heading', '-S'])
+  "  call denite#custom#var('grep',     'recursive_opts', [])
+  "  call denite#custom#var('grep',     'final_opts',   [])
 
-  else
-    call denite#custom#var('file/rec', 'command',
-          \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-  endif
+  "else
+  "  call denite#custom#var('file/rec', 'command',
+  "        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+  "endif
 
-  call denite#custom#source('file_rec', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
-  call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-      \ [ '*~', '*.o', '*.exe', '*.bak',
-      \ '.DS_Store', '*.pyc', '*.sw[po]', '*.class',
-      \ '.hg/', '.git/', '.bzr/', '.svn/', 'public/',
-      \ 'node_modules/', 'bower_components/', 'tmp/', 'log/', 'vendor/ruby', 
-      \ '.idea/', 'dist/',
-      \ 'tags', 'tags-*'])
-  call denite#custom#map('insert', '<C-N>', '<denite:move_to_next_line>', 'noremap')
-  call denite#custom#map('insert', '<C-P>', '<denite:move_to_previous_line>', 'noremap')
+  "call denite#custom#source('file_rec', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
+  "call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+  "    \ [ '*~', '*.o', '*.exe', '*.bak',
+  "    \ '.DS_Store', '*.pyc', '*.sw[po]', '*.class',
+  "    \ '.hg/', '.git/', '.bzr/', '.svn/',
+  "    \ 'node_modules/', 'bower_components/', 'tmp/', 'log/', 'vendor/ruby',
+  "    \ '.idea/', 'dist/',
+  "    \ 'tags', 'tags-*'])
+  "call denite#custom#map('insert', '<C-N>', '<denite:move_to_next_line>', 'noremap')
+  "call denite#custom#map('insert', '<C-P>', '<denite:move_to_previous_line>', 'noremap')
 
 
   " Required:
@@ -159,15 +164,46 @@ nnoremap L gt
 nmap <silent> <C-E> :NERDTreeToggle %<CR>
 "autocmd BufEnter * lcd %:p:h
 
+" CtrlP
+"let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+"let g:ctrlp_clear_cache_on_exit = 0
+"let g:ctrlp_lazy_update = 1
+"let g:ctrlp_custom_ignore = {
+"  \ 'dir':  '\v[\/](doc|tmp|node_modules)',
+"  \ 'file': '\v\.(exe|o|dll)$'
+"  \ }
+"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+"let g:ctrlp_root_markers = ['Gemfile', 'package.json', 'pom.xml', 'build.xml']
+"let g:ctrlp_max_height = 20
+
+" FZF 
+fun! FzfOmniFiles()
+  let is_git = system('git status')
+  if v:shell_error
+    :Files
+  else
+    :GitFiles
+  endif
+endfun
+
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-g> :Rg<Space>
+nnoremap <leader><leader> :Commands<CR>
+nnoremap <C-p> :call FzfOmniFiles()<CR>
+
+let g:fzf_action = { 
+  \ 'ctrl-o': 'tab split' 
+  \ }
+
 "keymapping
-nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
-nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
-nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
-nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
-nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
-nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
-nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
-nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
+"nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
+"nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
+"nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
+"nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
+"nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
+"nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
+"nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
+"nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
 
 " backup to ~/.tmp -
 " https://stackoverflow.com/questions/821902/disabling-swap-files-creation-in-vim
