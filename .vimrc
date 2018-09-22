@@ -195,6 +195,14 @@ let g:fzf_action = {
   \ 'ctrl-o': 'tab split' 
   \ }
 
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+  \   <bang>0)
+
+
 "keymapping
 "nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
 "nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
