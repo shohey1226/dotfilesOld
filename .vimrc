@@ -86,8 +86,8 @@ if dein#load_state($HOME . '/.cache/dein')
   call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
       \ [ '*~', '*.o', '*.exe', '*.bak',
       \ '.DS_Store', '*.pyc', '*.sw[po]', '*.class',
-      \ '.hg/', '.git/', '.bzr/', '.svn/',
-      \ 'node_modules/', 'bower_components/', 'tmp/', 'log/', 'vendor/ruby',
+      \ '.hg/', '.git/', '.bzr/', '.svn/', 'public/',
+      \ 'node_modules/', 'bower_components/', 'tmp/', 'log/', 'vendor/ruby', 
       \ '.idea/', 'dist/',
       \ 'tags', 'tags-*'])
   call denite#custom#map('insert', '<C-N>', '<denite:move_to_next_line>', 'noremap')
@@ -141,6 +141,7 @@ let g:deoplete#enable_at_startup = 1
 " session
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
+nnoremap <Leader>ss :SaveSession 
 
 " change color of popup menu
 highlight Pmenu ctermbg=8 guibg=#606060

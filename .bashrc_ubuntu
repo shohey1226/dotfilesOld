@@ -129,5 +129,4 @@ alias slack-term="slack-term --config $HOME/snap/slack-term/current/slack-term.j
 [[ -d ~/.rbenv  ]] && export PATH=${HOME}/.rbenv/bin:${PATH} && eval "$(rbenv init -)"
 
 # attach automatically when it's opened 
-# https://unix.stackexchange.com/questions/43601/how-can-i-set-my-default-shell-to-start-up-tmux
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
+[ -z "$TMUX"  ] && \. "$HOME/starttmux.sh"
