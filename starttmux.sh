@@ -8,7 +8,7 @@ if [ "$?" -eq 1 ] ; then
   tmux start-server
   
   # create a new tmux session, starting vim from a saved session in the new window
-  tmux new-session -d -s $session 
+  tmux -u new-session -d -s $session 
   
   # Select pane 1, set dir to api, run vim
   tmux selectp -t 1 

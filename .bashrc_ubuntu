@@ -130,3 +130,5 @@ alias slack-term="slack-term --config $HOME/snap/slack-term/current/slack-term.j
 
 # attach automatically when it's opened 
 [ -z "$TMUX"  ] && \. "$HOME/starttmux.sh"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
