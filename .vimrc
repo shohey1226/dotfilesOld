@@ -140,6 +140,9 @@ set background=dark
 set t_Co=256
 set langmenu=en_US.UTF-8
 let g:airline_theme = 'wombat'
+set hlsearch
+hi Search ctermbg=Cyan
+hi Search ctermfg=White
 
 let g:deoplete#enable_at_startup = 1
 
@@ -227,5 +230,3 @@ set ambiwidth=double
 " speed up
 let loaded_matchparen = 1
 set ttyfast
-set lazyredraw
-"set nocul!
