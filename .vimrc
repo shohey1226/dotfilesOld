@@ -142,7 +142,7 @@ set langmenu=en_US.UTF-8
 let g:airline_theme = 'wombat'
 set hlsearch
 hi Search ctermbg=Cyan
-hi Search ctermfg=White
+hi Search ctermfg=Black
 
 let g:deoplete#enable_at_startup = 1
 
