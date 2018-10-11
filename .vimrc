@@ -126,11 +126,10 @@ filetype plugin indent on
 set autoindent
 set number
 
-" for ruby
-"::autocmd Filetype ruby set softtabstop=2
-"::autocmd Filetype ruby set sw=2
-"::autocmd Filetype ruby set ts=2
-
+" Set tab per FileType 
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2
+autocmd FileType javascript setlocal ts=4 sts=4 sw=4
  
 "theming
 syntax enable 
