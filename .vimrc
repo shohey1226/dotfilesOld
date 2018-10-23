@@ -61,6 +61,10 @@ if dein#load_state($HOME . '/.cache/dein')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 
+  call dein#add('prettier/vim-prettier', { 
+    \ 'do': 'yarn install', 
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] })
+
   "
   "call dein#add('ctrlpvim/ctrlp.vim')
   "
@@ -159,6 +163,9 @@ hi TabLineFill  ctermfg=White  ctermbg=DarkGray cterm=NONE
 hi TabLineSel   ctermfg=Black  ctermbg=DarkGreen cterm=NONE
 nnoremap H gT
 nnoremap L gt
+
+" Prettier
+let g:prettier#config#tab_width = 4
 
 " tree view
 "autocmd vimenter * NERDTree
