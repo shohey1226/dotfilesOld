@@ -133,7 +133,7 @@ set number
 " Set tab per FileType 
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2
-autocmd FileType javascript setlocal ts=4 sts=4 sw=4
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
  
 "theming
 syntax enable 
@@ -165,7 +165,12 @@ nnoremap H gT
 nnoremap L gt
 
 " Prettier
-let g:prettier#config#tab_width = 4
+let g:prettier#config#tab_width = 2
+let g:prettier#config#single_quote = 'false'
+let g:prettier#config#trailing_comma = 'none'
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#print_width = 120 
+
 
 " tree view
 "autocmd vimenter * NERDTree
