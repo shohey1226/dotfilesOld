@@ -55,11 +55,15 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('osyo-manga/vim-monster', { 'on_ft': 'ruby' })
 
   " autocompletion
-  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
+  call dein#add('autozimu/LanguageClient-neovim', { 'branch': 'next',
+    \ 'go': 'bash install.sh' })
+
+
 
   call dein#add('prettier/vim-prettier', { 
     \ 'do': 'yarn install', 
@@ -71,6 +75,7 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
+  
   "if executable('rg')
   "  call denite#custom#var('file/rec', 'command',
   "        \ ['rg', '--files', '--glob', '!.git'])
@@ -148,6 +153,16 @@ hi Search ctermbg=Cyan
 hi Search ctermfg=Black
 
 let g:deoplete#enable_at_startup = 1
+let g:LanguageClient_serverCommands = {
+  \ 'ruby': ['solargraph', 'stdio'],
+  \ }
+let g:deoplete#auto_complete_delay = 50
+let g:deoplete#enable_camel_case = 0
+let g:deoplete#enable_ignore_case = 0
+let g:deoplete#enable_refresh_always = 0
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#max_list = 100
 
 " session
 let g:session_autosave = 'no'
