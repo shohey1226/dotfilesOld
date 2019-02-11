@@ -60,10 +60,10 @@ if dein#load_state($HOME . '/.cache/dein')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
-  call dein#add('autozimu/LanguageClient-neovim', { 'branch': 'next',
-    \ 'go': 'bash install.sh' })
-
-
+  call dein#add('autozimu/LanguageClient-neovim', {
+      \ 'rev': 'next',
+      \ 'build': 'bash install.sh',
+      \ })
 
   call dein#add('prettier/vim-prettier', { 
     \ 'do': 'yarn install', 
@@ -155,7 +155,20 @@ hi Search ctermfg=Black
 let g:deoplete#enable_at_startup = 1
 let g:LanguageClient_serverCommands = {
   \ 'ruby': ['solargraph', 'stdio'],
+  \ 'javascript': ['javascript-typescript-stdio'],
   \ }
+let g:LanguageClient_autoStart = 1
+nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
+nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
+nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
+nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
+nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
+nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
+nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+
 let g:deoplete#auto_complete_delay = 50
 let g:deoplete#enable_camel_case = 0
 let g:deoplete#enable_ignore_case = 0
