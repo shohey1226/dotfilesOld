@@ -269,3 +269,7 @@ set ambiwidth=double
 " speed up
 let loaded_matchparen = 1
 set ttyfast
+
+" Issue on ctrl+space https://qiita.com/aristoclesshakya/items/9f0149b0d75d173a3f19
+imap <Nul> <Nop>
+nnoremap <c-space> <Nop>
