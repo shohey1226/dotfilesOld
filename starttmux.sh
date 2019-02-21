@@ -9,21 +9,24 @@ if [ "$?" -eq 1 ] ; then
   
   # create a new tmux session, starting vim from a saved session in the new window
   tmux -u new-session -d -s $session 
+
+  # restore
+  tmux send-keys -t $session /home/shohey1226/.tmux/plugins/tmux-resurrect/scripts/restore.sh enter
   
-  # Select pane 1, set dir to api, run vim
-  tmux selectp -t 1 
-  tmux send-keys "cd ~/git/Gauss; rails s" C-m 
-  
-  # Split pane 1 horizontal by 65%, start redis-server
-  tmux splitw -v -p 50 
-  tmux send-keys "cd ~/git/Gauss; rails c" C-m 
-  
-  # create a new windows
-  tmux new-window -t $session:1 
-  tmux send-keys -t $session:1 "cd ~/git/Gauss; vim -S $HOME/.vim/sessions/gauss.vim" C-m
-  
-  tmux new-window -t $session:2 
-  tmux send-keys -t $session:2 "cd ~/git/Gauss" C-m
+  ## Select pane 1, set dir to api, run vim
+  #tmux selectp -t 1 
+  #tmux send-keys "cd ~/git/Gauss; rails s" C-m 
+  #
+  ## Split pane 1 horizontal by 65%, start redis-server
+  #tmux splitw -v -p 50 
+  #tmux send-keys "cd ~/git/Gauss; rails c" C-m 
+  #
+  ## create a new windows
+  #tmux new-window -t $session:1 
+  #tmux send-keys -t $session:1 "cd ~/git/Gauss; vim -S $HOME/.vim/sessions/gauss.vim" C-m
+  #
+  #tmux new-window -t $session:2 
+  #tmux send-keys -t $session:2 "cd ~/git/Gauss" C-m
   
   ## Select pane 2 
   #tmux selectp -t 2
