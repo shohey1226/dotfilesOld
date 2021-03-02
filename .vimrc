@@ -19,10 +19,6 @@ if dein#load_state($HOME . '/.cache/dein')
   " Required:
   call dein#add($HOME . '/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-  " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim') 
-  call dein#add('Shougo/neosnippet-snippets')
-
   " You can specify revision/branch/tag.
   call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
 
@@ -55,60 +51,31 @@ if dein#load_state($HOME . '/.cache/dein')
   call dein#add('osyo-manga/vim-monster', { 'on_ft': 'ruby' })
 
   " autocompletion
-  call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-  call dein#add('autozimu/LanguageClient-neovim', {
-      \ 'rev': 'next',
-      \ 'build': 'bash install.sh',
-      \ })
+  call dein#add('neoclide/coc.nvim', {'branch': 'release'})
 
   call dein#add('prettier/vim-prettier', { 
     \ 'do': 'yarn install', 
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] })
 
-  "
-  "call dein#add('ctrlpvim/ctrlp.vim')
-  "
+  " fzf
   call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
   " session control
   call dein#add('tpope/vim-obsession')
+
+  " typescript
+  call dein#add('leafgarland/typescript-vim')
+
+  " vue
+  call dein#add('posva/vim-vue')
   
-  "if executable('rg')
-  "  call denite#custom#var('file/rec', 'command',
-  "        \ ['rg', '--files', '--glob', '!.git'])
-  "  call denite#custom#var('grep', 'command', ['rg', '--threads', '1'])
-  "  call denite#custom#var('grep', 'recursive_opts', [])
-  "  call denite#custom#var('grep', 'final_opts', [])
-  "  call denite#custom#var('grep', 'separator', ['--'])
-  "  call denite#custom#var('grep', 'default_opts',
-  "        \ ['--vimgrep', '--no-heading'])
-
-  "  call denite#custom#var('grep',     'command', ['rg'])
-  "  call denite#custom#var('grep',     'default_opts', ['--hidden', '--vimgrep', '--no-heading', '-S'])
-  "  call denite#custom#var('grep',     'recursive_opts', [])
-  "  call denite#custom#var('grep',     'final_opts',   [])
-
-  "else
-  "  call denite#custom#var('file/rec', 'command',
-  "        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-  "endif
-
-  "call denite#custom#source('file_rec', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
-  "call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-  "    \ [ '*~', '*.o', '*.exe', '*.bak',
-  "    \ '.DS_Store', '*.pyc', '*.sw[po]', '*.class',
-  "    \ '.hg/', '.git/', '.bzr/', '.svn/',
-  "    \ 'node_modules/', 'bower_components/', 'tmp/', 'log/', 'vendor/ruby',
-  "    \ '.idea/', 'dist/',
-  "    \ 'tags', 'tags-*'])
-  "call denite#custom#map('insert', '<C-N>', '<denite:move_to_next_line>', 'noremap')
-  "call denite#custom#map('insert', '<C-P>', '<denite:move_to_previous_line>', 'noremap')
-
+  " erb
+  call dein#add('Chiel92/vim-autoformat')
+  
+  " theme
+  call dein#add('dracula/vim')
+  call dein#add('connorholyday/vim-snazzy')
 
   " Required:
   call dein#end()
@@ -131,6 +98,8 @@ set fileencoding=utf-8
 set fileencodings=utf-8,euc-jp,cp932
 
 set expandtab
+"https://stackoverflow.com/questions/37957844/set-expandtab-in-vimrc-not-taking-effect
+set pastetoggle=<F2>
 set softtabstop=2
 set shiftwidth=2
 filetype plugin indent on
@@ -139,12 +108,13 @@ set number
 
 " Set tab per FileType 
 autocmd FileType html setlocal ts=2 sts=2 sw=2
-autocmd FileType ruby setlocal ts=2 sts=2 sw=2
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
  
 "theming
 syntax enable 
 colorscheme dracula 
+"colorscheme snazzy
 "colorscheme molokai 
 set background=dark
 set t_Co=256
@@ -154,30 +124,19 @@ set hlsearch
 hi Search ctermbg=Cyan
 hi Search ctermfg=Black
 
-let g:deoplete#enable_at_startup = 1
-let g:LanguageClient_serverCommands = {
-  \ 'ruby': ['solargraph', 'stdio'],
-  \ 'javascript': ['javascript-typescript-stdio'],
-  \ }
-let g:LanguageClient_autoStart = 1
-nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
-nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
-nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
-nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
-nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
-nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
-nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
-nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
-nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
-nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
-
-let g:deoplete#auto_complete_delay = 50
-let g:deoplete#enable_camel_case = 0
-let g:deoplete#enable_ignore_case = 0
-let g:deoplete#enable_refresh_always = 0
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#max_list = 100
+" CoC
+let g:coc_global_extensions = [
+      \  'coc-lists'
+      \, 'coc-json'
+      \, 'coc-marketplace'
+      \, 'coc-html'
+      \, 'coc-css'
+      \, 'coc-tsserver'
+      \, 'coc-solargraph'
+      \, 'coc-python'
+      \, 'coc-snippets'
+      \, 'coc-vetur'
+      \ ]
 
 " session
 let g:session_autosave = 'no'
@@ -208,18 +167,6 @@ let g:prettier#config#print_width = 120
 nmap <silent> <C-E> :NERDTreeToggle %<CR>
 "autocmd BufEnter * lcd %:p:h
 
-" CtrlP
-"let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
-"let g:ctrlp_clear_cache_on_exit = 0
-"let g:ctrlp_lazy_update = 1
-"let g:ctrlp_custom_ignore = {
-"  \ 'dir':  '\v[\/](doc|tmp|node_modules)',
-"  \ 'file': '\v\.(exe|o|dll)$'
-"  \ }
-"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-"let g:ctrlp_root_markers = ['Gemfile', 'package.json', 'pom.xml', 'build.xml']
-"let g:ctrlp_max_height = 20
-
 " FZF 
 fun! FzfOmniFiles()
   let is_git = system('git status')
@@ -246,21 +193,12 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
   \   <bang>0)
 
-
-"keymapping
-"nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
-"nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
-"nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
-"nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
-"nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
-"nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
-"nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
-"nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
+let g:fzf_layout = { 'down': '~40%' }
 
 " backup to ~/.tmp -
 " https://stackoverflow.com/questions/821902/disabling-swap-files-creation-in-vim
 set backup 
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
+set backupdir=~/.tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/* 
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
 set writebackup
@@ -275,3 +213,4 @@ set ttyfast
 " Issue on ctrl+space https://qiita.com/aristoclesshakya/items/9f0149b0d75d173a3f19
 imap <Nul> <Nop>
 nnoremap <c-space> <Nop>
+
